@@ -5,8 +5,10 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
-- ES6 and above: traditional `for` is **faster** than `for-of` that is faster than `for-in`
-- ES5 and lower:Traditional `for` is **similar to** `for-of` and both faster than `for-in`.
+- ES6 and above: traditional `for` is **faster** than `for-of`, which is faster than `for-in`
+- ES5 and lower:Traditional `for` is **similar to** `for-of`, and both are faster than `for-in`.
+
+This is true for array of number, string, etc.
 
 ```typescript
 // Traditional
@@ -27,6 +29,7 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
     sum += arr[i]
   }
 ```
+See the ./src for full explanation.
 
 <details>
 <summary>Benchmark-Result</summary>
@@ -37,6 +40,11 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
     for-of x 83,331 ops/sec Â±0.15% (96 runs sampled)
     for-in x 2,544 ops/sec Â±0.86% (94 runs sampled)
     Fastest is for-traditional
+    
+    for-traditional-str x 66,219 ops/sec ±0.35% (96 runs sampled)
+    for-of-str x 47,433 ops/sec ±0.21% (95 runs sampled)
+    for-in-str x 2,635 ops/sec ±1.42% (87 runs sampled)
+    Fastest is for-traditional-str
 
     ES 6:
 
@@ -51,6 +59,11 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
     for-of x 110,395 ops/sec Â±0.60% (98 runs sampled)
     for-in x 2,604 ops/sec Â±1.05% (95 runs sampled)
     Fastest is for-traditional,for-of
+    
+    for-traditional-str x 66,381 ops/sec ±0.22% (95 runs sampled)
+    for-of-str x 66,490 ops/sec ±0.20% (96 runs sampled)
+    for-in-str x 3,019 ops/sec ±0.71% (96 runs sampled)
+    Fastest is for-of-str
 
 </details>
 
