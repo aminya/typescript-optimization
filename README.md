@@ -1,6 +1,8 @@
 # TypeScript-optimization
 Tests and benchmarks different codes in TypeScript for different JavaScript versions (ES5 vs ES6 and above).
 
+Benchmarks are done inside Atom (using script package) and Webstorm.
+
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
 - ES6 and above: traditional `for` is **faster** than `for-of` that is faster than `for-in`
@@ -82,7 +84,7 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
 <summary>Benchmark-Result</summary>
 
     const arr
-    
+
     ES2020:
 
     for-traditional x 111,107 ops/sec Â±0.38% (97 runs sampled)
@@ -98,14 +100,14 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
     Fastest is for-traditional,for-traditional-const,for-traditional-length-lookup
 
     ES5:
-    
+
     for-traditional x 111,351 ops/sec Â±0.17% (98 runs sampled)
     for-traditional-const x 111,326 ops/sec Â±0.15% (96 runs sampled)
     for-traditional-lookup x 110,693 ops/sec Â±0.42% (97 runs sampled)
     Fastest is for-traditional
 
     let arr:
-    
+
      ES2020:
 
     for-traditional x 111,310 ops/sec Â±0.23% (93 runs sampled)
@@ -114,7 +116,7 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
     Fastest is for-traditional-length-lookup,for-traditional,for-traditional-const
 
     ES5:
-    
+
     for-traditional x 110,594 ops/sec ±0.53% (94 runs sampled)
     for-traditional-const x 111,455 ops/sec ±0.14% (97 runs sampled)
     for-traditional-lookup x 111,463 ops/sec ±0.15% (96 runs sampled)

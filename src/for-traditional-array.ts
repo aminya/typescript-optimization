@@ -1,7 +1,7 @@
 const Benchmark = require("benchmark")
 let suite = new Benchmark.Suite()
 
-let arr: number[] = []
+const arr: number[] = []
 for (let i = 0; i < 10000; ++i) arr.push(i)
 
 // add tests
