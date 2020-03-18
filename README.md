@@ -1,53 +1,53 @@
 # TypeScript-optimization
 Tests and benchmarks different codes in TypeScript for different JavaScript versions (ES5 vs ES6 and above).
 
-### Traditional `for` vs `for-of` - Looping ovr Arrays
+### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
-- Traditional `for` is **faster** than `for-of` for ES6 and above.
-- Traditional `for` is **similar to** `for-of` for ES5 (no meaningful difference).
+- ES6 and above: traditional `for` is **faster** than `for-of` that is faster than `for-in`
+- ES5 and lower:Traditional `for` is **similar to** `for-of` and both faster than `for-in`.
 
 ```typescript
 // Traditional
-let sum = 0
-for (let i = 0, l = arr.length; i < l; ++i) {
-sum += arr[i]
-}
+  let sum = 0
+  for (let i = 0, l = arr.length; i < l; ++i) {   // Don't use `i < arr.length` instead
+    sum += arr[i]
+  }
 
 // for - of
-let sum = 0
-for (const n of arr) sum += n
+  let sum = 0
+  for (const a of arr) {
+    sum += a
+  }
+
+// for - in
+  let sum = 0
+  for (const i in arr) {
+    sum += arr[i]
+  }
 ```
-
-
-The reason: probably because of `var` vs `let`.
 
 <details>
 <summary>Benchmark-Result</summary>
 
     ES2020:
 
-    for-traditional x 110,906 ops/sec Â±0.15% (94 runs sampled)
-    for-of x 81,956 ops/sec Â±1.09% (92 runs sampled)
-    Fastest is for-traditional
-
-
-    ES 2018:
-
-    for-traditional x 110,582 ops/sec Â±0.50% (95 runs sampled)
-    for-of x 83,032 ops/sec Â±0.55% (94 runs sampled)
+    for-traditional x 111,162 ops/sec Â±0.16% (96 runs sampled)
+    for-of x 83,331 ops/sec Â±0.15% (96 runs sampled)
+    for-in x 2,544 ops/sec Â±0.86% (94 runs sampled)
     Fastest is for-traditional
 
     ES 6:
 
-    for-traditional x 110,783 ops/sec Â±0.41% (97 runs sampled)
-    for-of x 83,222 ops/sec Â±0.25% (96 runs sampled)
+    for-traditional x 110,622 ops/sec Â±0.34% (95 runs sampled)
+    for-of x 83,102 ops/sec Â±0.16% (94 runs sampled)
+    for-in x 2,521 ops/sec Â±1.21% (94 runs sampled)
     Fastest is for-traditional
-
 
     ES5:
 
-    for-traditional x 110,915 ops/sec Â±0.28% (92 runs sampled)
-    for-of x 111,122 ops/sec Â±0.20% (93 runs sampled)
-    Fastest is for-of
+    for-traditional x 110,584 ops/sec Â±0.56% (95 runs sampled)
+    for-of x 110,395 ops/sec Â±0.60% (98 runs sampled)
+    for-in x 2,604 ops/sec Â±1.05% (95 runs sampled)
+    Fastest is for-traditional,for-of
 
 </details>

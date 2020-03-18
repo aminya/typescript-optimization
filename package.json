@@ -6,7 +6,11 @@
     "benchmark": "^2.1.4",
     "typescript": "^3.8.3"
   },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
   "prettier": {
-    "semi": false
+    "semi": false,
+    "printWidth": 120
   }
 }

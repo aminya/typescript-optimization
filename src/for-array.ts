@@ -14,7 +14,16 @@ suite.add("for-traditional", function() {
 
 suite.add("for-of", function() {
   let sum = 0
-  for (const n of arr) sum += n
+  for (const a of arr) {
+    sum += a
+  }
+})
+
+suite.add("for-in", function() {
+  let sum = 0
+  for (const i in arr) {
+    sum += arr[i]
+  }
 })
 
 // add listeners
