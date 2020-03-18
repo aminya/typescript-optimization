@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6", // I target ES5, ES6, and ES2020
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
