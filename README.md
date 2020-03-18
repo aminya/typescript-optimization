@@ -8,6 +8,8 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 - ES6 and above: traditional `for` is **faster** than `for-of` that is faster than `for-in`
 - ES5 and lower:Traditional `for` is **similar to** `for-of` and both faster than `for-in`.
 
+If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!!
+
 ```typescript
 // Traditional
   let sum = 0
@@ -131,5 +133,48 @@ for (let i = 0; i < arr_return().length; ++i) {
     for-traditional-const x 111,455 ops/sec ±0.14% (97 runs sampled)
     for-traditional-lookup x 111,463 ops/sec ±0.15% (96 runs sampled)
     Fastest is for-traditional-const,for-traditional-length-lookup
+
+</details>
+
+
+### `for-of` optimization
+
+- in all versions: full array look-up in the `for-head` is much slower.
+
+If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!!
+
+```typescript
+// for-of
+  let sum = 0
+  for (const a of arr) {
+    sum += a
+  }
+// for-of-full-array-lookup
+  let sum = 0
+  for (const a of arr_return()) {
+    sum += a
+  }
+```
+
+<details>
+<summary>Benchmark-Result</summary>
+
+    ES2020:
+
+    for-of x 83,144 ops/sec ±0.52% (93 runs sampled)
+    for-of-full-lookup x 13,930 ops/sec ±0.62% (95 runs sampled)
+    Fastest is for-of
+
+    ES 6:
+
+    for-of x 83,036 ops/sec ±0.43% (95 runs sampled)
+    for-of-full-lookup x 13,779 ops/sec ±0.90% (96 runs sampled)
+    Fastest is for-of
+
+    ES5:
+
+    for-of x 110,799 ops/sec ±0.15% (96 runs sampled)
+    for-of-full-lookup x 15,122 ops/sec ±0.74% (95 runs sampled)
+    Fastest is for-of
 
 </details>
