@@ -142,7 +142,7 @@ for (let i = 0; i < arr_return().length; ++i) {
 If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
 `, you can make `for-of` slow in ES5 too!!! 
 
-To fix this issue you can use `package_withbaebl.json` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for`.
+To fix this issue you can use `package_baebl.json` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for`.
 
 ```typescript
 // for-of
