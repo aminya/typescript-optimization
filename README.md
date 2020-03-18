@@ -8,9 +8,6 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 - ES6 and above: traditional `for` is **faster** than `for-of` that is faster than `for-in`
 - ES5 and lower:Traditional `for` is **similar to** `for-of` and both faster than `for-in`.
 
-If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `    "downlevelIteration": true
-`, you can make `for-of` slow in ES5 too!!!.
-
 ```typescript
 // Traditional
   let sum = 0
@@ -142,8 +139,10 @@ for (let i = 0; i < arr_return().length; ++i) {
 
 - in all versions: full array look-up in the `for-head` is much slower.
 
-If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `    "downlevelIteration": true
-`, you can make `for-of` slow in ES5 too!!!.
+If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
+`, you can make `for-of` slow in ES5 too!!! 
+
+To fix this issue you can use `package_withbaebl.json` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for`.
 
 ```typescript
 // for-of

@@ -1,0 +1,33 @@
+{
+  "name": "typescript-optimization",
+  "version": "1.0.0",
+  "scripts": {
+    "typescript": "tsc",
+    "babel": "babel src --out-dir src",
+    "install": "npm run typescript -s & npm run babel -s"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "ts-node": "^8.6.2",
+    "prettier": "^1.19.1",
+    "babel-preset-minify": "^0.5.1",
+    "@babel/plugin-transform-for-of": "^7.8.6",
+    "@babel/core": "^7.8.7",
+    "@babel/cli": "^7.8.4"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 120
+  },
+  "babel": {
+    "presets": [
+      ["minify",{"deadcode": false}]
+    ],
+    "plugins": [
+      ["@babel/plugin-transform-for-of",{"assumeArray": true}]
+    ]
+  }
+}
