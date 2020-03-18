@@ -27,6 +27,20 @@ suite.add("for-traditional-length-lookup", function() {
   }
 })
 
+function arr_return() {
+  const arr: number[] = []
+  for (let i = 0; i < 10000; ++i) arr.push(i)
+  return arr
+}
+const arr2 = arr_return()
+
+suite.add("for-traditional-full-lookup", function() {
+  let sum = 0
+  for (let i = 0; i < arr_return().length; ++i) {
+    sum += arr2[i]
+  }
+})
+
 // add listeners
 suite.on("cycle", function(event) {
   console.log(String(event.target))
@@ -35,4 +49,4 @@ suite.on("complete", function() {
   console.log("Fastest is " + this.filter("fastest").map("name"))
 })
 // run async
-suite.run({ async: false })
+suite.run({ async: true })

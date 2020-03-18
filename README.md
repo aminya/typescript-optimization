@@ -54,9 +54,9 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 
 </details>
 
-### Traditional for optimization
+### Traditional `for` optimization
 
-- in all versions: all the codes are about the same.
+- in all versions: First three the codes are about the same, but full array lookup in the `for-head` is very slow.
 
 Defining `arr` as `const` or `let` doesn't affect the speed.
 
@@ -78,6 +78,13 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
   for (let i = 0; i < arr.length; ++i) {
     sum += arr[i]
   }
+
+// for-traditional-array-lookup
+// to only measure its effect on calling inside the for-head
+let sum = 0;
+for (let i = 0; i < arr_return().length; ++i) {
+    sum += arr[i];
+}
 ```
 
 <details>
@@ -90,6 +97,7 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
     for-traditional x 111,107 ops/sec Â±0.38% (97 runs sampled)
     for-traditional-const x 111,392 ops/sec Â±0.19% (98 runs sampled)
     for-traditional-lookup x 111,242 ops/sec Â±0.22% (95 runs sampled)
+    for-traditional-full-lookup x 1.77 ops/sec ±1.09% (9 runs sampled)
     Fastest is for-traditional,for-traditional-const,for-traditional-length-lookup
 
     ES 6:
@@ -97,13 +105,15 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
     for-traditional x 111,197 ops/sec Â±0.18% (95 runs sampled)
     for-traditional-const x 111,209 ops/sec Â±0.18% (96 runs sampled)
     for-traditional-lookup x 111,111 ops/sec Â±0.13% (96 runs sampled)
+    for-traditional-full-lookup x 1.78 ops/sec ±0.77% (9 runs sampled)
     Fastest is for-traditional,for-traditional-const,for-traditional-length-lookup
 
     ES5:
 
-    for-traditional x 111,351 ops/sec Â±0.17% (98 runs sampled)
-    for-traditional-const x 111,326 ops/sec Â±0.15% (96 runs sampled)
-    for-traditional-lookup x 110,693 ops/sec Â±0.42% (97 runs sampled)
+    for-traditional x 109,984 ops/sec ±0.67% (95 runs sampled)
+    for-traditional-const x 110,267 ops/sec ±0.80% (91 runs sampled)
+    for-traditional-length-lookup x 109,373 ops/sec ±0.74% (94 runs sampled)
+    for-traditional-full-lookup x 1.68 ops/sec ±3.05% (9 runs sampled)
     Fastest is for-traditional
 
     let arr:
