@@ -8,7 +8,7 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 - ES6 and above: traditional `for` is **faster** than `for-of`, which is faster than `for-in`
 - ES5 and lower:Traditional `for` is **similar to** `for-of`, and both are faster than `for-in`.
 
-This is true for array of number, string, etc.
+This is true for array of number, string, etc. For any array size (150 and 10000) are tested.
 
 ```typescript
 // Traditional
@@ -64,6 +64,20 @@ See the ./src for full explanation.
     for-of-str x 66,490 ops/sec ±0.20% (96 runs sampled)
     for-in-str x 3,019 ops/sec ±0.71% (96 runs sampled)
     Fastest is for-of-str
+    
+    
+    array of size 150 
+    
+    ES2020
+    
+    for-traditional x 6,641,843 ops/sec ±0.38% (92 runs sampled)
+    for-of x 4,053,310 ops/sec ±0.40% (95 runs sampled)
+    for-in x 194,003 ops/sec ±0.56% (88 runs sampled)
+    Fastest is for-traditional
+    for-traditional-str x 6,198,811 ops/sec ±0.20% (95 runs sampled)
+    for-of-str x 2,890,933 ops/sec ±0.24% (96 runs sampled)
+    for-in-str x 192,768 ops/sec ±0.24% (94 runs sampled)
+    Fastest is for-traditional-str
 
 </details>
 
