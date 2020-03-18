@@ -8,14 +8,14 @@ Tests and benchmarks different codes in TypeScript for different JavaScript vers
 
 ```typescript
 // Traditional
-let sum = 0;
+let sum = 0
 for (let i = 0, l = arr.length; i < l; ++i) {
-    sum += arr[i];
+sum += arr[i]
 }
 
 // for - of
-let sum = 0;
-for (let n of arr) sum += n;
+let sum = 0
+for (const n of arr) sum += n
 ```
 
 
