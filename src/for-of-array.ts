@@ -34,3 +34,5 @@ suite.on("complete", function() {
 })
 // run async
 suite.run({ async: true })
+
+export {};

@@ -73,3 +73,5 @@ suite2.on("complete", function() {
 })
 // run async
 suite2.run({ async: false })
+
+export {};
