@@ -5,7 +5,8 @@
     "sourceMap": false,
     "lib": [
       "ES2020"
-    ]
+    ],
+    "outDir": "./src"
   },
   "exclude": [
     "node_modules"
