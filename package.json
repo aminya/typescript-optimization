@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "scripts": {
     "typescript": "tsc",
-    "install": "npm run typescript -s"
+    "build": "npm run typescript -s"
   },
   "dependencies": {
-    "benchmark": "^2.1.4",
-    "typescript": "^3.8.3"
+    "benchmark": "^2.1.4"
   },
   "devDependencies": {
     "prettier": "^1.19.1",
     "typescript": "^3.8.3",
-    "ts-node": "^8.6.2"
+    "ts-node": "^8.7.0"
   },
   "prettier": {
     "semi": false,
