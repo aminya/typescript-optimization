@@ -4,7 +4,8 @@
   "scripts": {
     "typescript": "tsc",
     "babel": "babel src --out-dir src",
-    "build": "npm run typescript -s & npm run babel -s"
+    "prettier": "prettier ./src/**/* --write",
+    "build": "npm run typescript -s & npm run babel -s && npm run prettier -s"
   },
   "dependencies": {
     "benchmark": "^2.1.4"
@@ -24,7 +25,10 @@
   },
   "babel": {
     "presets": [
-      ["minify",{"deadcode": false}]
+      ["minify", {
+        "deadcode": false,
+        "mangle": false
+      }]
     ],
     "plugins": [
       ["@babel/plugin-transform-for-of",{"assumeArray": true}]
