@@ -10,6 +10,7 @@ suite.add("for-traditional", function() {
   for (let i = 0, l = arr.length; i < l; ++i) {
     sum += arr[i]
   }
+  return sum
 })
 
 suite.add("for-traditional-const", function() {
@@ -18,6 +19,7 @@ suite.add("for-traditional-const", function() {
   for (let i = 0; i < l; ++i) {
     sum += arr[i]
   }
+  return sum
 })
 
 suite.add("for-traditional-length-lookup", function() {
@@ -25,6 +27,7 @@ suite.add("for-traditional-length-lookup", function() {
   for (let i = 0; i < arr.length; ++i) {
     sum += arr[i]
   }
+  return sum
 })
 
 function arr_return() {
@@ -39,6 +42,7 @@ suite.add("for-traditional-full-lookup", function() {
   for (let i = 0; i < arr_return().length; ++i) {
     sum += arr2[i]
   }
+  return sum
 })
 
 // add listeners

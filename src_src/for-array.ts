@@ -15,6 +15,7 @@ suite.add("for-traditional", function() {
   for (let i = 0, l = arr.length; i < l; ++i) {
     sum += arr[i]
   }
+  return sum
 })
 
 suite.add("for-of", function() {
@@ -22,6 +23,7 @@ suite.add("for-of", function() {
   for (const a of arr) {
     sum += a
   }
+  return sum
 })
 
 suite.add("for-in", function() {
@@ -29,6 +31,7 @@ suite.add("for-in", function() {
   for (const i in arr) {
     sum += arr[i]
   }
+  return sum
 })
 
 
@@ -48,6 +51,7 @@ suite2.add("for-traditional-str", function() {
   for (let i = 0, l = arr_str.length; i < l; ++i) {
     sum.concat(arr_str[i])
   }
+  return sum
 })
 
 suite2.add("for-of-str", function() {
@@ -55,6 +59,7 @@ suite2.add("for-of-str", function() {
   for (const a of arr_str) {
     sum.concat(a)
   }
+  return sum
 })
 
 suite2.add("for-in-str", function() {
@@ -62,6 +67,7 @@ suite2.add("for-in-str", function() {
   for (const i in arr_str) {
     sum.concat(arr_str[i])
   }
+  return sum
 })
 
 // add listeners

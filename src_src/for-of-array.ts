@@ -10,6 +10,7 @@ suite.add("for-of", function() {
   for (const a of arr) {
     sum += a
   }
+  return sum
 })
 
 function arr_return() {
@@ -23,6 +24,7 @@ suite.add("for-of-full-lookup", function() {
   for (const a of arr_return()) {
     sum += a
   }
+  return sum
 })
 
 // add listeners
