@@ -2,7 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "ES2020", // I target ES5, ES6, and ES2020
-    "sourceMap": false
+    "sourceMap": false,
+    "lib": [
+      "ES2020"
+    ]
   },
   "exclude": [
     "node_modules"

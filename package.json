@@ -2,7 +2,7 @@
   "name": "typescript-optimization",
   "version": "1.0.0",
   "scripts": {
-    "typescript": "tsc",
+    "typescript": "tsc --build tsconfig.json",
     "build": "npm run typescript -s"
   },
   "dependencies": {
