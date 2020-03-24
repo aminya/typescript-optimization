@@ -1,9 +1,14 @@
+import { Chance } from "chance"
+const chance = new Chance()
+
 const Benchmark = require("benchmark")
 let suite = new Benchmark.Suite()
 
-const arr: number[] = []
-for (let i = 0; i < 10000; ++i) arr.push(i)
+/* ************************************************************************* */
+// setup
+const arr = chance.n(chance.floating, 10000)
 
+/* ************************************************************************* */
 // add tests
 suite.add("for-of", function() {
   let sum = 0
