@@ -3,8 +3,17 @@ const chance = new Chance()
 const Benchmark = require("benchmark")
 
 /* ************************************************************************* */
+// parameter
+const arr_length = 10
+
+console.log("array size of "+ arr_length)
+
+/* ************************************************************************* */
+// number array
+
+/* ************************************************************************* */
 // setup
-const arr = chance.n(chance.floating, 10000)
+const arr = chance.n(chance.floating, arr_length)
 
 /* ************************************************************************* */
 // functions
@@ -51,11 +60,11 @@ console.log("number array")
 suite.run({ async: false })
 
 /* ************************************************************************* */
-// String array
+// string array
 
 /* ************************************************************************* */
 // setup
-const arr_str = chance.n(chance.string, 10000)
+const arr_str = chance.n(chance.string, arr_length)
 
 /* ************************************************************************* */
 // functions

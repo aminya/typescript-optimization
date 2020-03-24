@@ -8,7 +8,7 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 - ES6 and above: traditional `for` is **faster** than `for-of`, which is faster than `for-in`
 - ES5 and lower:Traditional `for` is **similar to** `for-of`, and both are faster than `for-in`.
 
-This is true for array of number, string, etc. For any array size (150 and 10000) are tested.
+This is true for array of number, string, etc, and for any array size (10, 100, 10000 are tested).
 
 If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
 `, you can make `for-of` slow in ES5 too!!!  To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
@@ -37,56 +37,71 @@ See the ./src for full explanation.
 <details>
 <summary>Benchmark-Result</summary>
 
-    ES2020:
+    -------------------    
+    array size of 10
 
-    for-traditional x 83,660 ops/sec Â±0.17% (94 runs sampled)
-    for-of x 31,854 ops/sec Â±0.56% (94 runs sampled)
-    for-in x 1,991 ops/sec Â±0.72% (84 runs sampled)
-    Fastest is for-traditional
+    ES6 and ES2020:
     
-    for-traditional-str x 61,637 ops/sec Â±0.52% (95 runs sampled)
-    for-of-str x 46,691 ops/sec Â±0.29% (90 runs sampled)
-    for-in-str x 2,469 ops/sec Â±1.43% (87 runs sampled)
-    Fastest is for-traditional-str
-
-    ES 6:
-
-    for-traditional x 83,720 ops/sec Â±0.16% (97 runs sampled)
-    for-of x 31,742 ops/sec Â±0.67% (94 runs sampled)
-    for-in x 2,402 ops/sec Â±0.33% (95 runs sampled)
-    Fastest is for-traditional
+    number array
+    for_traditional x 92,928,200 ops/sec Â±2.29% (82 runs sampled)
+    for_of x 19,458,768 ops/sec Â±1.14% (95 runs sampled)
+    for_in x 1,791,886 ops/sec Â±1.47% (90 runs sampled)
+    Fastest is for_traditional
     
-    for-traditional-str x 62,452 ops/sec Â±0.27% (96 runs sampled)
-    for-of-str x 46,222 ops/sec Â±0.49% (96 runs sampled)
-    for-in-str x 2,573 ops/sec Â±0.70% (89 runs sampled)
-    Fastest is for-traditional-str
+    string array
+    for_traditional_str x 61,545,102 ops/sec Â±0.84% (91 runs sampled)
+    for_of_str x 35,545,222 ops/sec Â±1.28% (94 runs sampled)
+    for_in_str x 1,843,325 ops/sec Â±1.65% (90 runs sampled)
+    Fastest is for_traditional_str
+    
+    
+    -------------------    
+    array size of 100
+
+    ES6 and ES2020:
+    
+    number array
+    for_traditional x 9,637,735 ops/sec Â±0.28% (93 runs sampled)
+    for_of x 2,318,205 ops/sec Â±0.49% (95 runs sampled)
+    for_in x 247,436 ops/sec Â±2.10% (92 runs sampled)
+    Fastest is for_traditional
+    
+    string array
+    for_traditional_str x 7,374,552 ops/sec Â±0.51% (89 runs sampled)
+    for_of_str x 4,132,730 ops/sec Â±0.58% (89 runs sampled)
+    for_in_str x 256,286 ops/sec Â±2.32% (87 runs sampled)
+    Fastest is for_traditional_str
+    
+    -------------------    
+    array size of 10000
+
+    ES6 and ES2020:
+
+    number array
+    for_traditional x 82,093 ops/sec Â±0.72% (93 runs sampled)
+    for_of x 25,968 ops/sec Â±5.27% (76 runs sampled)
+    for_in x 2,147 ops/sec Â±3.52% (86 runs sampled)
+    Fastest is for_traditional
+    
+    for_traditional_str x 64,355 ops/sec Â±0.32% (90 runs sampled)
+    for_of_str x 46,471 ops/sec Â±0.48% (92 runs sampled)
+    for_in_str x 2,538 ops/sec Â±1.27% (88 runs sampled)
+    Fastest is for_traditional_str
 
     ES5:
 
-    for-traditional x 83,484 ops/sec Â±0.29% (93 runs sampled)
-    for-of x 83,442 ops/sec Â±0.32% (94 runs sampled)
-    for-in x 2,247 ops/sec Â±3.24% (90 runs sampled)
-    Fastest is for-traditional
+    number array
+    for_traditional x 83,733 ops/sec Â±0.22% (92 runs sampled)
+    for_of x 83,851 ops/sec Â±0.16% (95 runs sampled)
+    for_in x 2,289 ops/sec Â±0.57% (94 runs sampled)
+    Fastest is for_of,for_traditional
     
-    for-traditional-str x 57,166 ops/sec Â±1.70% (85 runs sampled)
-    for-of-str x 57,567 ops/sec Â±0.82% (90 runs sampled)
-    for-in-str x 2,522 ops/sec Â±0.90% (88 runs sampled)
-    Fastest is for-of-str
-        
+    string array
+    for_traditional_str x 65,135 ops/sec Â±0.57% (89 runs sampled)
+    for_of_str x 66,133 ops/sec Â±0.21% (93 runs sampled)
+    for_in_str x 2,295 ops/sec Â±5.61% (83 runs sampled)
+    Fastest is for_of_str,for_traditional_str
     
-    array of size 150 
-    
-    ES2020
-    
-    for-traditional x 6,641,843 ops/sec ±0.38% (92 runs sampled)
-    for-of x 4,053,310 ops/sec ±0.40% (95 runs sampled)
-    for-in x 194,003 ops/sec ±0.56% (88 runs sampled)
-    Fastest is for-traditional
-    for-traditional-str x 6,198,811 ops/sec ±0.20% (95 runs sampled)
-    for-of-str x 2,890,933 ops/sec ±0.24% (96 runs sampled)
-    for-in-str x 192,768 ops/sec ±0.24% (94 runs sampled)
-    Fastest is for-traditional-str
-
 </details>
 
 ### Traditional `for` optimization
