@@ -8,9 +8,11 @@
     "build": "npm run typescript -s & npm run babel -s && npm run prettier -s"
   },
   "dependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "chance": "^1.1.4"
   },
   "devDependencies": {
+    "@types/chance": "^1.0.9",
     "typescript": "^3.8.3",
     "ts-node": "^8.7.0",
     "prettier": "^1.19.1",
@@ -25,13 +27,21 @@
   },
   "babel": {
     "presets": [
-      ["minify", {
-        "deadcode": false,
-        "mangle": false
-      }]
+      [
+        "minify",
+        {
+          "deadcode": false,
+          "mangle": false
+        }
+      ]
     ],
     "plugins": [
-      ["@babel/plugin-transform-for-of",{"loose": true}]
+      [
+        "@babel/plugin-transform-for-of",
+        {
+          "loose": true
+        }
+      ]
     ]
   }
 }
