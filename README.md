@@ -39,35 +39,40 @@ See the ./src for full explanation.
 
     ES2020:
 
-    for-traditional x 111,162 ops/sec Â±0.16% (96 runs sampled)
-    for-of x 83,331 ops/sec Â±0.15% (96 runs sampled)
-    for-in x 2,544 ops/sec Â±0.86% (94 runs sampled)
+    for-traditional x 83,660 ops/sec Â±0.17% (94 runs sampled)
+    for-of x 31,854 ops/sec Â±0.56% (94 runs sampled)
+    for-in x 1,991 ops/sec Â±0.72% (84 runs sampled)
     Fastest is for-traditional
     
-    for-traditional-str x 66,219 ops/sec ±0.35% (96 runs sampled)
-    for-of-str x 47,433 ops/sec ±0.21% (95 runs sampled)
-    for-in-str x 2,635 ops/sec ±1.42% (87 runs sampled)
+    for-traditional-str x 61,637 ops/sec Â±0.52% (95 runs sampled)
+    for-of-str x 46,691 ops/sec Â±0.29% (90 runs sampled)
+    for-in-str x 2,469 ops/sec Â±1.43% (87 runs sampled)
     Fastest is for-traditional-str
 
     ES 6:
 
-    for-traditional x 110,622 ops/sec Â±0.34% (95 runs sampled)
-    for-of x 83,102 ops/sec Â±0.16% (94 runs sampled)
-    for-in x 2,521 ops/sec Â±1.21% (94 runs sampled)
+    for-traditional x 83,720 ops/sec Â±0.16% (97 runs sampled)
+    for-of x 31,742 ops/sec Â±0.67% (94 runs sampled)
+    for-in x 2,402 ops/sec Â±0.33% (95 runs sampled)
     Fastest is for-traditional
+    
+    for-traditional-str x 62,452 ops/sec Â±0.27% (96 runs sampled)
+    for-of-str x 46,222 ops/sec Â±0.49% (96 runs sampled)
+    for-in-str x 2,573 ops/sec Â±0.70% (89 runs sampled)
+    Fastest is for-traditional-str
 
     ES5:
 
-    for-traditional x 110,584 ops/sec Â±0.56% (95 runs sampled)
-    for-of x 110,395 ops/sec Â±0.60% (98 runs sampled)
-    for-in x 2,604 ops/sec Â±1.05% (95 runs sampled)
-    Fastest is for-traditional,for-of
+    for-traditional x 83,484 ops/sec Â±0.29% (93 runs sampled)
+    for-of x 83,442 ops/sec Â±0.32% (94 runs sampled)
+    for-in x 2,247 ops/sec Â±3.24% (90 runs sampled)
+    Fastest is for-traditional
     
-    for-traditional-str x 66,381 ops/sec ±0.22% (95 runs sampled)
-    for-of-str x 66,490 ops/sec ±0.20% (96 runs sampled)
-    for-in-str x 3,019 ops/sec ±0.71% (96 runs sampled)
+    for-traditional-str x 57,166 ops/sec Â±1.70% (85 runs sampled)
+    for-of-str x 57,567 ops/sec Â±0.82% (90 runs sampled)
+    for-in-str x 2,522 ops/sec Â±0.90% (88 runs sampled)
     Fastest is for-of-str
-    
+        
     
     array of size 150 
     
