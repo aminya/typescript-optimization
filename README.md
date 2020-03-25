@@ -6,12 +6,13 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 ### Summary:
 - Traditional `for` loops are faster.
 - Don't call functions (or lookup arrays) in the head of `for` loop
-- Use Transformers/compilers to transform other types of `for` to traditional `for`
 - Define constant variables as constant
+- Use Transformers/compilers to transform other types of `for` to traditional `for`
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
 - ES6 and above: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
+
 - ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
 
 This is true for array of number, string, etc, and for any array size (10, 100, 1000 are tested).
@@ -44,9 +45,7 @@ See the ./src for full explanation.
 <summary>Benchmark-Result</summary>
 
     -------------------    
-    array size of 10
-
-    ES6 and ES2020:
+    ES2020:
     
     array size of 10
     number array
@@ -61,11 +60,7 @@ See the ./src for full explanation.
     for_in_str x 1,928,360 ops/sec Â±0.68% (93 runs sampled)
     Fastest is for_traditional_str
         
-    -------------------    
-    array size of 100
-
-    ES6 and ES2020:
-    
+    -------------------        
     array size of 100
     number array
     for_traditional x 9,624,379 ops/sec Â±0.29% (91 runs sampled)
@@ -80,10 +75,6 @@ See the ./src for full explanation.
     Fastest is for_traditional_str
     
     -------------------    
-    array size of 10000
-
-    ES6 and ES2020:
-
     array size of 1000
     number array
     for_traditional x 807,444 ops/sec Â±0.22% (89 runs sampled)
@@ -97,6 +88,7 @@ See the ./src for full explanation.
     for_in_str x 28,672 ops/sec Â±1.55% (91 runs sampled)
     Fastest is for_traditional_str
 
+    -------------------    
     ES5:
 
     number array
@@ -155,7 +147,7 @@ See the ./src for full explanation.
 <summary>Benchmark-Result</summary>
 
     ES2020:
-
+    -------------------    
     array size of 10
     number array
     for_traditional x 62,302 ops/sec Â±0.72% (89 runs sampled)
@@ -163,7 +155,8 @@ See the ./src for full explanation.
     for_traditional_length_lookup x 62,299 ops/sec Â±1.11% (87 runs sampled)
     for_traditional_full_lockup x 5,647 ops/sec Â±0.94% (93 runs sampled)
     Fastest is for_traditional
-    
+    -------------------    
+
     array size of 100
     number array
     for_traditional x 6,481 ops/sec Â±0.81% (93 runs sampled)
@@ -172,6 +165,7 @@ See the ./src for full explanation.
     for_traditional_full_lockup x 65.56 ops/sec Â±0.89% (68 runs sampled)
     Fastest is for_traditional_length_lookup,for_traditional_const
 
+    -------------------    
     array size of 1000
     number array
     for_traditional x 645 ops/sec Â±0.92% (91 runs sampled)
@@ -180,6 +174,7 @@ See the ./src for full explanation.
     for_traditional_full_lockup x 0.66 ops/sec Â±0.67% (6 runs sampled)
     Fastest is for_traditional_length_lookup
 
+    -------------------    
     ES5:
 
     array size of 1000
@@ -218,24 +213,30 @@ See the ./src for full explanation.
 
     ES2020:
 
+    -------------------    
     array size of 10
     number array
     for_of x 65,064 ops/sec Â±0.89% (89 runs sampled)
     for_of_full_lookup x 65,289 ops/sec Â±0.92% (94 runs sampled)
     Fastest is for_of_full_lookup,for_of
         
-    rray size of 100
+    -------------------    
+
+    array size of 100
     number array
     for_of x 6,542 ops/sec Â±0.74% (93 runs sampled)
     for_of_full_lookup x 6,549 ops/sec Â±1.09% (93 runs sampled)
     Fastest is for_of,for_of_full_lookup
     
+    -------------------    
+
     array size of 1000
     number array
     for_of x 663 ops/sec Â±0.91% (91 runs sampled)
     for_of_full_lookup x 665 ops/sec Â±0.89% (92 runs sampled)
     Fastest is for_of_full_lookup,for_of
 
+    -------------------    
     ES5:
 
     array size of 1000
@@ -244,4 +245,93 @@ See the ./src for full explanation.
     for_of_full_lookup x 654 ops/sec Â±0.75% (93 runs sampled)
     Fastest is for_of_full_lookup,for_of
 
+</details>
+
+
+### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Objects
+
+- ES6 and above: 
+    - object size of more 17: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
+    
+    - object size of less than 17: `for-in` is faster than others. traditional `for` is **faster** than `for-of`. This is probably because of CPU cache size. 
+
+- ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
+
+If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
+`, you can make `for-of` slow in ES5 too!!!  To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
+
+```typescript
+// Traditional
+  let sum = ""
+  const keys = Object.keys(dict)
+  for (let i = 0, l = keys.length; i < l; ++i) {
+    sum.concat(dict[keys[i]])
+  }
+
+// for - of
+  let sum = ""
+  const keys = Object.keys(dict)
+  for (const k of keys) {
+    sum.concat(dict[k])
+  }
+
+// for - in
+  let sum = ""
+  for (const k in dict) {
+    sum.concat(dict[k])
+  }
+```
+
+<details>
+<summary>Benchmark-Result</summary>
+
+ -------------------    
+    ES2020:
+    
+    object size of 10
+    dict string string
+    for_traditional x 5,125,466 ops/sec Â±1.51% (86 runs sampled)
+    for_of x 4,980,500 ops/sec Â±0.85% (89 runs sampled)
+    for_in x 37,777,600 ops/sec Â±1.00% (91 runs sampled)
+    Fastest is for_in
+        
+    object size of 17
+    dict string string
+    for_traditional x 2,824,064 ops/sec Â±1.24% (84 runs sampled)
+    for_of x 2,682,647 ops/sec Â±1.19% (88 runs sampled)
+    for_in x 25,912,994 ops/sec Â±1.46% (91 runs sampled)
+    Fastest is for_in
+    
+    object size of 20
+    dict string string
+    for_traditional x 1,141,042 ops/sec Â±3.40% (85 runs sampled)
+    for_of x 1,156,106 ops/sec Â±0.95% (89 runs sampled)
+    for_in x 900,274 ops/sec Â±0.64% (93 runs sampled)
+    Fastest is for_of
+    -------------------        
+    object size of 100
+    dict string string
+    for_traditional x 202,166 ops/sec Â±0.70% (92 runs sampled)
+    for_of x 197,962 ops/sec Â±1.39% (92 runs sampled)
+    for_in x 161,014 ops/sec Â±1.14% (92 runs sampled)
+    Fastest is for_traditional,for_of
+        
+    -------------------    
+    object size of 1000
+    dict string string
+    for_traditional x 9,661 ops/sec Â±0.29% (95 runs sampled)
+    for_of x 9,578 ops/sec Â±0.51% (93 runs sampled)
+    for_in x 8,628 ops/sec Â±0.73% (90 runs sampled)
+    Fastest is for_traditional
+
+    -------------------    
+    ES5:
+
+    object size of 1000
+    dict string string
+    for_traditional x 9,752 ops/sec Â±0.32% (95 runs sampled)
+    for_of x 9,759 ops/sec Â±0.44% (95 runs sampled)
+    for_in x 8,878 ops/sec Â±0.36% (94 runs sampled)
+    Fastest is for_traditional,for_of
+    
 </details>
