@@ -3,7 +3,7 @@ Compares different for-loops in TypeScript/JavaScript
 
 Benchmarks are done inside Atom (using script package) and Webstorm. Different JavaScript versions (ES2020 and ES5) are tested.
 
-### Summary:
+## Summary:
 - Traditional `for` loops are faster.
 - Don't call functions (or lookup arrays) in the head of `for` loop
 - Define constant variables as constant
