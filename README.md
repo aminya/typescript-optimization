@@ -111,17 +111,18 @@ See the ./src for full explanation.
 
 ### Traditional `for` optimization
 
-- in all versions: First three the codes are about the same, but full array lookup in the `for-head` is very slow.
-
-Defining `arr` as `const` or `let` doesn't affect the speed.
+- in all versions: first three loop are about the same. Full array lookup in the `for-head` is very slow.
 
 ```typescript
 // for-traditional
+  const arr = chance.n(chance.floating, arr_length) 
   let sum = 0
   for (let i = 0, l = arr.length; i < l; ++i) {
     sum += arr[i]
   }
+
 // for-traditional-const
+  const arr = chance2.n(chance2.floating, arr_length)
   let sum = 0
   const l = arr.length
   for (let i = 0; i < l; ++i) {
@@ -129,6 +130,7 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
   }
 
 // for-traditional-length-lookup
+  const arr = chance3.n(chance3.floating, arr_length)
   let sum = 0
   for (let i = 0; i < arr.length; ++i) {
     sum += arr[i]
@@ -136,57 +138,52 @@ Defining `arr` as `const` or `let` doesn't affect the speed.
 
 // for-traditional-array-lookup
 // to only measure its effect on calling inside the for-head
-let sum = 0;
-for (let i = 0; i < arr_return().length; ++i) {
-    sum += arr[i];
-}
+  let sum = 0
+  for (let i = 0; i < arr_return().length; ++i) {
+    sum += arr2[i] // only comparing lookup
+
+  }
 ```
 
 <details>
 <summary>Benchmark-Result</summary>
 
-    const arr
-
     ES2020:
 
-    for-traditional x 111,107 ops/sec Â±0.38% (97 runs sampled)
-    for-traditional-const x 111,392 ops/sec Â±0.19% (98 runs sampled)
-    for-traditional-lookup x 111,242 ops/sec Â±0.22% (95 runs sampled)
-    for-traditional-full-lookup x 1.77 ops/sec ±1.09% (9 runs sampled)
-    Fastest is for-traditional,for-traditional-const,for-traditional-length-lookup
+    array size of 10
+    number array
+    for_traditional x 62,302 ops/sec Â±0.72% (89 runs sampled)
+    for_traditional_const x 61,790 ops/sec Â±0.97% (93 runs sampled)
+    for_traditional_length_lookup x 62,299 ops/sec Â±1.11% (87 runs sampled)
+    for_traditional_full_lockup x 5,647 ops/sec Â±0.94% (93 runs sampled)
+    Fastest is for_traditional
+    
+    array size of 100
+    number array
+    for_traditional x 6,481 ops/sec Â±0.81% (93 runs sampled)
+    for_traditional_const x 6,575 ops/sec Â±0.90% (93 runs sampled)
+    for_traditional_length_lookup x 6,590 ops/sec Â±0.86% (93 runs sampled)
+    for_traditional_full_lockup x 65.56 ops/sec Â±0.89% (68 runs sampled)
+    Fastest is for_traditional_length_lookup,for_traditional_const
 
-    ES 6:
-
-    for-traditional x 111,197 ops/sec Â±0.18% (95 runs sampled)
-    for-traditional-const x 111,209 ops/sec Â±0.18% (96 runs sampled)
-    for-traditional-lookup x 111,111 ops/sec Â±0.13% (96 runs sampled)
-    for-traditional-full-lookup x 1.78 ops/sec ±0.77% (9 runs sampled)
-    Fastest is for-traditional,for-traditional-const,for-traditional-length-lookup
-
-    ES5:
-
-    for-traditional x 109,984 ops/sec ±0.67% (95 runs sampled)
-    for-traditional-const x 110,267 ops/sec ±0.80% (91 runs sampled)
-    for-traditional-length-lookup x 109,373 ops/sec ±0.74% (94 runs sampled)
-    for-traditional-full-lookup x 1.68 ops/sec ±3.05% (9 runs sampled)
-    Fastest is for-traditional
-
-    let arr:
-
-     ES2020:
-
-    for-traditional x 111,310 ops/sec Â±0.23% (93 runs sampled)
-    for-traditional-const x 111,201 ops/sec Â±0.36% (96 runs sampled)
-    for-traditional-lookup x 111,430 ops/sec Â±0.20% (99 runs sampled)
-    Fastest is for-traditional-length-lookup,for-traditional,for-traditional-const
+    array size of 1000
+    number array
+    for_traditional x 645 ops/sec Â±0.92% (91 runs sampled)
+    for_traditional_const x 643 ops/sec Â±0.83% (91 runs sampled)
+    for_traditional_length_lookup x 661 ops/sec Â±0.57% (91 runs sampled)
+    for_traditional_full_lockup x 0.66 ops/sec Â±0.67% (6 runs sampled)
+    Fastest is for_traditional_length_lookup
 
     ES5:
 
-    for-traditional x 110,594 ops/sec ±0.53% (94 runs sampled)
-    for-traditional-const x 111,455 ops/sec ±0.14% (97 runs sampled)
-    for-traditional-lookup x 111,463 ops/sec ±0.15% (96 runs sampled)
-    Fastest is for-traditional-const,for-traditional-length-lookup
-
+    array size of 1000
+    number array
+    for_traditional x 652 ops/sec Â±0.63% (90 runs sampled)
+    for_traditional_const x 654 ops/sec Â±0.99% (91 runs sampled)
+    for_traditional_length_lookup x 651 ops/sec Â±1.00% (92 runs sampled)
+    for_traditional_full_lockup x 0.66 ops/sec Â±0.79% (6 runs sampled)
+    Fastest is for_traditional,for_traditional_const,for_traditional_length_lookup
+    
 </details>
 
 
