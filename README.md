@@ -5,8 +5,8 @@ Benchmarks are done inside Atom (using script package) and Webstorm.
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
-- ES6 and above: traditional `for` is **faster** than `for-of`, which is faster than `for-in`
-- ES5 and lower:Traditional `for` is **similar to** `for-of`, and both are faster than `for-in`.
+- ES6 and above: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
+- ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
 
 This is true for array of number, string, etc, and for any array size (10, 100, 1000 are tested).
 
@@ -192,14 +192,17 @@ for (let i = 0; i < arr_return().length; ++i) {
 
 ### `for-of` optimization
 
-- in all versions: full array look-up in the `for-head` is much slower.
+- in all versions: similar result
 
 ```typescript
 // for-of
+  // array is made inside the function for fare comparison
+  const arr = chance.n(chance.floating, arr_length)
   let sum = 0
   for (const a of arr) {
     sum += a
   }
+
 // for-of-full-array-lookup
   let sum = 0
   for (const a of arr_return()) {
@@ -214,20 +217,28 @@ for (let i = 0; i < arr_return().length; ++i) {
 
     array size of 10
     number array
-    for_of x 19,385,238 ops/sec Â±1.84% (88 runs sampled)
-    for_of_full_lookup x 63,038 ops/sec Â±1.94% (89 runs sampled)
-    Fastest is for_of
-    
-    array size of 100
+    for_of x 65,064 ops/sec Â±0.89% (89 runs sampled)
+    for_of_full_lookup x 65,289 ops/sec Â±0.92% (94 runs sampled)
+    Fastest is for_of_full_lookup,for_of
+        
+    rray size of 100
     number array
-    for_of x 2,335,884 ops/sec Â±0.53% (96 runs sampled)
-    for_of_full_lookup x 6,628 ops/sec Â±0.81% (91 runs sampled)
-    Fastest is for_of
+    for_of x 6,542 ops/sec Â±0.74% (93 runs sampled)
+    for_of_full_lookup x 6,549 ops/sec Â±1.09% (93 runs sampled)
+    Fastest is for_of,for_of_full_lookup
+    
+    array size of 1000
+    number array
+    for_of x 663 ops/sec Â±0.91% (91 runs sampled)
+    for_of_full_lookup x 665 ops/sec Â±0.89% (92 runs sampled)
+    Fastest is for_of_full_lookup,for_of
 
     ES5:
 
-    for-of x 110,799 ops/sec ±0.15% (96 runs sampled)
-    for-of-full-lookup x 15,122 ops/sec ±0.74% (95 runs sampled)
-    Fastest is for-of
+    array size of 1000
+    number array
+    for_of x 652 ops/sec Â±1.09% (90 runs sampled)
+    for_of_full_lookup x 654 ops/sec Â±0.75% (93 runs sampled)
+    Fastest is for_of_full_lookup,for_of
 
 </details>

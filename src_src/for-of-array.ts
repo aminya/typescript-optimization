@@ -7,7 +7,7 @@ const Benchmark = require("benchmark")
 
 /* ************************************************************************* */
 // parameter
-const arr_length = 10
+const arr_length = 1000
 
 console.log("array size of "+ arr_length)
 
@@ -15,13 +15,11 @@ console.log("array size of "+ arr_length)
 // number array
 
 /* ************************************************************************* */
-// setup
-const arr = chance.n(chance.floating, arr_length)
-
-/* ************************************************************************* */
 // functions
 
 function for_of () {
+  // array is made inside the function for fare comparison
+  const arr = chance.n(chance.floating, arr_length)
   let sum = 0
   for (const a of arr) {
     sum += a
@@ -31,7 +29,8 @@ function for_of () {
 
 
 function arr_return() {
-  return chance2.n(chance2.floating, arr_length)
+  const arr = chance2.n(chance2.floating, arr_length)
+  return arr
 }
 
 function for_of_full_lookup () {
