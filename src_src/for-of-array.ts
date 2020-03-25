@@ -14,6 +14,10 @@ console.log("array size of "+ arr_length)
 /* ************************************************************************* */
 // number array
 
+function arr_return() {
+  const arr = chance2.n(chance2.floating, arr_length)
+  return arr
+}
 /* ************************************************************************* */
 // functions
 
@@ -27,11 +31,6 @@ function for_of () {
   return sum
 }
 
-
-function arr_return() {
-  const arr = chance2.n(chance2.floating, arr_length)
-  return arr
-}
 
 function for_of_full_lookup () {
   let sum = 0
