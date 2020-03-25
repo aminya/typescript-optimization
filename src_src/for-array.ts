@@ -17,7 +17,7 @@ const arr = chance.n(chance.floating, arr_length)
 
 /* ************************************************************************* */
 // functions
-function for_traditional(arr) {
+function for_traditional(arr: number[]) {
   let sum = 0
   for (let i = 0, l = arr.length; i < l; ++i) {
     sum += arr[i]
@@ -25,7 +25,7 @@ function for_traditional(arr) {
   return sum
 }
 
-function for_of (arr) {
+function for_of (arr: number[]) {
   let sum = 0
   for (const a of arr) {
     sum += a
@@ -33,7 +33,7 @@ function for_of (arr) {
   return sum
 }
 
-function for_in (arr) {
+function for_in (arr: number[]) {
   let sum = 0
   for (const i in arr) {
     sum += arr[i]
@@ -68,7 +68,7 @@ const arr_str = chance.n(chance.string, arr_length)
 
 /* ************************************************************************* */
 // functions
-function for_traditional_str(arr_str) {
+function for_traditional_str(arr_str: string[]) {
   let sum = ""
   for (let i = 0, l = arr_str.length; i < l; ++i) {
     sum.concat(arr_str[i])
@@ -76,7 +76,7 @@ function for_traditional_str(arr_str) {
   return sum
 }
 
-function for_of_str (arr_str) {
+function for_of_str (arr_str: string[]) {
   let sum = ""
   for (const a of arr_str) {
     sum.concat(a)
@@ -84,7 +84,7 @@ function for_of_str (arr_str) {
   return sum
 }
 
-function for_in_str (arr_str) {
+function for_in_str (arr_str: string[]) {
   let sum = ""
   for (const i in arr_str) {
     sum.concat(arr_str[i])
