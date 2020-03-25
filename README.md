@@ -1,7 +1,7 @@
 # TypeScript-optimization
-Tests and benchmarks different codes in TypeScript for different JavaScript versions (ES5 vs ES6 and above).
+Compares different for-loops in TypeScript/JavaScript
 
-Benchmarks are done inside Atom (using script package) and Webstorm.
+Benchmarks are done inside Atom (using script package) and Webstorm. Different JavaScript versions (ES2020 and ES5) are tested.
 
 ### Summary:
 - Traditional `for` loops are faster.
@@ -253,7 +253,7 @@ See the ./src for full explanation.
 - ES6 and above: 
     - object size of more 17: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
     
-    - object size of less than 17: `for-in` is faster than others. traditional `for` is **faster** than `for-of`. This is probably because of CPU cache size. 
+    - object size of less than 17: `for-in` is faster than others. This is probably because of CPU cache size. traditional `for` is **faster** than `for-of`.
 
 - ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
 
