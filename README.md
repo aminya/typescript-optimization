@@ -9,6 +9,8 @@ Benchmarks are done inside Atom (using script package) and Webstorm. Different J
 - Define constant variables as constant
 - Use Transformers/compilers to transform other types of `for` to traditional `for`
 
+---------------------------
+
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
 - ES6 and above: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
