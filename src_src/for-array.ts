@@ -4,7 +4,7 @@ const Benchmark = require("benchmark")
 
 /* ************************************************************************* */
 // parameter
-const arr_length = 10
+const arr_length = 1000
 
 console.log("array size of "+ arr_length)
 
@@ -17,7 +17,7 @@ const arr = chance.n(chance.floating, arr_length)
 
 /* ************************************************************************* */
 // functions
-function for_traditional() {
+function for_traditional(arr) {
   let sum = 0
   for (let i = 0, l = arr.length; i < l; ++i) {
     sum += arr[i]
@@ -25,7 +25,7 @@ function for_traditional() {
   return sum
 }
 
-function for_of () {
+function for_of (arr) {
   let sum = 0
   for (const a of arr) {
     sum += a
@@ -33,7 +33,7 @@ function for_of () {
   return sum
 }
 
-function for_in () {
+function for_in (arr) {
   let sum = 0
   for (const i in arr) {
     sum += arr[i]
@@ -42,14 +42,14 @@ function for_in () {
 }
 /* ************************************************************************* */
 // test
-console.assert(for_of() === for_in() && for_in() === for_traditional())
+console.assert(for_of(arr) === for_in(arr) && for_in(arr) === for_traditional(arr))
 
 let suite = new Benchmark.Suite()
 
 // add benchmarks
-suite.add("for_traditional", () => for_traditional())
-suite.add("for_of", () => for_of())
-suite.add("for_in", () => for_in())
+suite.add("for_traditional", () => for_traditional(arr))
+suite.add("for_of", () => for_of(arr))
+suite.add("for_in", () => for_in(arr))
 
 // add listeners
 suite.on("cycle", (event) => console.log(String(event.target)) )
@@ -68,7 +68,7 @@ const arr_str = chance.n(chance.string, arr_length)
 
 /* ************************************************************************* */
 // functions
-function for_traditional_str() {
+function for_traditional_str(arr_str) {
   let sum = ""
   for (let i = 0, l = arr_str.length; i < l; ++i) {
     sum.concat(arr_str[i])
@@ -76,7 +76,7 @@ function for_traditional_str() {
   return sum
 }
 
-function for_of_str () {
+function for_of_str (arr_str) {
   let sum = ""
   for (const a of arr_str) {
     sum.concat(a)
@@ -84,7 +84,7 @@ function for_of_str () {
   return sum
 }
 
-function for_in_str () {
+function for_in_str (arr_str) {
   let sum = ""
   for (const i in arr_str) {
     sum.concat(arr_str[i])
@@ -94,15 +94,15 @@ function for_in_str () {
 
 /* ************************************************************************* */
 // test
-console.assert(for_of_str() === for_in_str() && for_in_str() === for_traditional_str())
+console.assert(for_of_str(arr_str) === for_in_str(arr_str) && for_in_str(arr_str) === for_traditional_str(arr_str))
 
 
 let suite2 = new Benchmark.Suite()
 
 // add benchmarks
-suite2.add("for_traditional_str", () => for_traditional_str())
-suite2.add("for_of_str", () => for_of_str())
-suite2.add("for_in_str", () => for_in_str())
+suite2.add("for_traditional_str", () => for_traditional_str(arr_str))
+suite2.add("for_of_str", () => for_of_str(arr_str))
+suite2.add("for_in_str", () => for_in_str(arr_str))
 
 // add listeners
 suite2.on("cycle", (event) => console.log(String(event.target)) )
