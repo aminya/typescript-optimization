@@ -252,36 +252,72 @@ See the ./src for full explanation.
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Objects
 
-- ES6 and above: 
-    - object size of more 17: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
+- ES2020 and ES5: 
+    - object size of more 17:  the best is `for_traditional_keys`
     
-    - object size of less than 17: `for-in` is faster than others. This is probably because of CPU cache size. traditional `for` is **faster** than `for-of`.
-
-- ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
-
-If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
-`, you can make `for-of` slow in ES5 too!!!  To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
+        Best to worst:   
+        
+        `for_traditional_keys`> `for_of_keys` > `for_in` > `for_of_values` > `for_traditional_values` > `for_of_entries`
+    
+    - object size of less than 17:  the best is `for_in`.  This is probably because of CPU cache size.
+   
+        Best to worst:   
+        
+        `for_in` > `for_traditional_values` > `for_of_values` >  `for_of_entries` > `for_traditional_keys`> `for_of_keys`   
 
 ```typescript
-// Traditional
+function for_traditional_keys(obj: Obj) {
   let sum = ""
-  const keys = Object.keys(dict)
+  const keys = Object.keys(obj)
   for (let i = 0, l = keys.length; i < l; ++i) {
-    sum.concat(dict[keys[i]])
+    sum.concat(obj[keys[i]])
   }
+  return sum
+}
 
-// for - of
+function for_traditional_values(obj: Obj) {
   let sum = ""
-  const keys = Object.keys(dict)
+  const values = Object.values(obj)
+  for (let i = 0, l = values.length; i < l; ++i) {
+    sum.concat(values[i])
+  }
+  return sum
+}
+
+function for_of_keys (obj: Obj) {
+  let sum = ""
+  const keys = Object.keys(obj)
   for (const k of keys) {
-    sum.concat(dict[k])
+    sum.concat(obj[k])
   }
+  return sum
+}
 
-// for - in
+function for_of_entries (obj: Obj) {
   let sum = ""
-  for (const k in dict) {
-    sum.concat(dict[k])
+  const entries = Object.entries(obj)
+  for (const [a, k] of entries) {
+    sum.concat(a)
   }
+  return sum
+}
+
+function for_of_values(obj: Obj) {
+  let sum = ""
+  const values = Object.values(obj)
+  for (const value of values) {
+    sum.concat(value)
+  }
+  return sum
+}
+
+function for_in (obj: Obj) {
+  let sum = ""
+  for (const k in obj) {
+    sum.concat(obj[k])
+  }
+  return sum
+}
 ```
 
 <details>
@@ -291,49 +327,68 @@ If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of
     ES2020:
     
     object size of 10
-    dict string string
-    for_traditional x 5,125,466 ops/sec Â±1.51% (86 runs sampled)
-    for_of x 4,980,500 ops/sec Â±0.85% (89 runs sampled)
-    for_in x 37,777,600 ops/sec Â±1.00% (91 runs sampled)
+    obj string string
+    for_traditional_keys x 5,198,136 ops/sec ±1.07% (88 runs sampled)
+    for_traditional_values x 10,641,417 ops/sec ±0.65% (92 runs sampled)
+    for_of_keys x 4,964,972 ops/sec ±1.14% (88 runs sampled)
+    for_of_entries x 5,432,608 ops/sec ±1.08% (89 runs sampled)
+    for_of_values x 10,047,025 ops/sec ±0.34% (95 runs sampled)
+    for_in x 32,279,989 ops/sec ±0.39% (97 runs sampled)
     Fastest is for_in
         
     object size of 17
-    dict string string
-    for_traditional x 2,824,064 ops/sec Â±1.24% (84 runs sampled)
-    for_of x 2,682,647 ops/sec Â±1.19% (88 runs sampled)
-    for_in x 25,912,994 ops/sec Â±1.46% (91 runs sampled)
+    obj string string
+    for_traditional_keys x 2,812,406 ops/sec ±1.11% (88 runs sampled)
+    for_traditional_values x 6,925,259 ops/sec ±0.52% (93 runs sampled)
+    for_of_keys x 2,618,206 ops/sec ±1.54% (83 runs sampled)
+    for_of_entries x 3,116,106 ops/sec ±1.33% (90 runs sampled)
+    for_of_values x 6,625,984 ops/sec ±0.34% (93 runs sampled)
+    for_in x 26,191,330 ops/sec ±1.26% (95 runs sampled)
     Fastest is for_in
     
     object size of 20
-    dict string string
-    for_traditional x 1,141,042 ops/sec Â±3.40% (85 runs sampled)
-    for_of x 1,156,106 ops/sec Â±0.95% (89 runs sampled)
-    for_in x 900,274 ops/sec Â±0.64% (93 runs sampled)
-    Fastest is for_of
+    obj string string
+    for_traditional_keys x 1,127,018 ops/sec ±1.29% (88 runs sampled)
+    for_traditional_values x 279,544 ops/sec ±0.39% (95 runs sampled)
+    for_of_keys x 1,112,033 ops/sec ±0.78% (86 runs sampled)
+    for_of_entries x 191,583 ops/sec ±0.38% (96 runs sampled)
+    for_of_values x 276,410 ops/sec ±1.27% (93 runs sampled)
+    for_in x 767,111 ops/sec ±1.19% (83 runs sampled)
+    Fastest is for_traditional_keys
     -------------------        
+    
     object size of 100
-    dict string string
-    for_traditional x 202,166 ops/sec Â±0.70% (92 runs sampled)
-    for_of x 197,962 ops/sec Â±1.39% (92 runs sampled)
-    for_in x 161,014 ops/sec Â±1.14% (92 runs sampled)
-    Fastest is for_traditional,for_of
+    obj string string
+    for_traditional_keys x 200,249 ops/sec ±1.09% (90 runs sampled)
+    for_traditional_values x 53,648 ops/sec ±0.93% (93 runs sampled)
+    for_of_keys x 193,080 ops/sec ±1.87% (86 runs sampled)
+    for_of_entries x 36,891 ops/sec ±0.96% (92 runs sampled)
+    for_of_values x 54,290 ops/sec ±0.54% (94 runs sampled)
+    for_in x 164,450 ops/sec ±0.95% (93 runs sampled)
+    Fastest is for_traditional_keys
         
     -------------------    
     object size of 1000
-    dict string string
-    for_traditional x 9,661 ops/sec Â±0.29% (95 runs sampled)
-    for_of x 9,578 ops/sec Â±0.51% (93 runs sampled)
-    for_in x 8,628 ops/sec Â±0.73% (90 runs sampled)
-    Fastest is for_traditional
+    obj string string
+    for_traditional_keys x 9,539 ops/sec ±0.58% (93 runs sampled)
+    for_traditional_values x 4,322 ops/sec ±0.42% (93 runs sampled)
+    for_of_keys x 9,606 ops/sec ±0.59% (89 runs sampled)
+    for_of_entries x 3,155 ops/sec ±0.25% (96 runs sampled)
+    for_of_values x 4,370 ops/sec ±0.33% (96 runs sampled)
+    for_in x 8,779 ops/sec ±0.61% (92 runs sampled)
+    Fastest is for_of_keys
 
     -------------------    
     ES5:
 
     object size of 1000
-    dict string string
-    for_traditional x 9,752 ops/sec Â±0.32% (95 runs sampled)
-    for_of x 9,759 ops/sec Â±0.44% (95 runs sampled)
-    for_in x 8,878 ops/sec Â±0.36% (94 runs sampled)
-    Fastest is for_traditional,for_of
+    obj string string
+    for_traditional_keys x 9,348 ops/sec ±0.47% (95 runs sampled)
+    for_traditional_values x 4,236 ops/sec ±0.57% (95 runs sampled)
+    for_of_keys x 9,019 ops/sec ±1.60% (90 runs sampled)
+    for_of_entries x 3,151 ops/sec ±0.20% (96 runs sampled)
+    for_of_values x 4,288 ops/sec ±0.35% (95 runs sampled)
+    for_in x 7,958 ops/sec ±0.87% (86 runs sampled)
+    Fastest is for_traditional_keys
     
 </details>
