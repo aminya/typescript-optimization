@@ -2,10 +2,10 @@
   "name": "typescript-optimization",
   "version": "1.0.0",
   "scripts": {
-    "typescript": "tsc",
+    "typescript": "tsc || echo done",
     "babel": "babel src --out-dir src",
     "prettier": "prettier ./src/**/* --write",
-    "build": "npm run typescript -s & npm run babel -s && npm run prettier -s"
+    "build": "npm run typescript -s && npm run prettier -s"
   },
   "dependencies": {
     "benchmark": "^2.1.4",
