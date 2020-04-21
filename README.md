@@ -7,17 +7,27 @@ Benchmarks are done inside Atom (using script package) and Webstorm. Different J
 - Traditional `for` loops are faster.
 - Don't call functions (or lookup arrays) in the head of `for` loop
 - Define constant variables as constant
-- Use Transformers/compilers to transform other types of `for` to traditional `for`
+- Use Transformers/compilers to transform other types of `for` to  `for_traditional`
+- Use `Object.keys` for looping over objects.
 
 ---------------------------
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
 
-- ES6 and above: traditional `for` is **faster** than `for-of`. Both are much faster than `for-in`.
+- ES6 and above: the best is `for_traditional_keys`
+                     
+    Best to worst:   
+         
+    `for_traditional`> `for_of` > `for_in` 
+ 
+- ES5 and lower: Both `for_traditional` and `for-of` are the best
+                                      
+    Best to worst:   
+          
+    `for_traditional` == `for_of` > `for_in` 
 
-- ES5 and lower:Traditional `for` is **similar to** `for-of`, by `for-of` being a small touch faster. Both are much faster than `for-in`.
 
-This is true for array of number, string, etc, and for any array size (10, 100, 1000 are tested).
+This is true for array of number, string, etc, and for any array size.
 
 If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
 `, you can make `for-of` slow in ES5 too!!!  To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
