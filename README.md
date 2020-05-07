@@ -7,9 +7,9 @@ Benchmarks are done inside Atom (using script package) and Webstorm. Different J
 - Traditional `for` loops are faster.
 - Don't call functions (or lookup arrays) in the head of `for` loop
 - Define constant variables as constant
-- Use Transformers/compilers to transform other types of `for` to  `for_traditional`
 - Use `Object.keys` for looping over objects.
-
+- Closure based loops (like `arr.reduce`) are not consistent and should be avoided.
+- Use Transformers/compilers to transform other types of `for` to  `for_traditional`
 ---------------------------
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
@@ -18,16 +18,22 @@ Benchmarks are done inside Atom (using script package) and Webstorm. Different J
                      
     Best to worst:   
          
-    `for_traditional`> `for_of` > `for_in` 
- 
+    `for_traditional` > `for_of` > `for_in` 
+     
 - ES5 and lower: Both `for_traditional` and `for-of` are the best
                                       
     Best to worst:   
           
     `for_traditional` == `for_of` > `for_in` 
-
-
+    
 This is true for array of number, string, etc, and for any array size.
+
+
+Closure based loops like `arr_reduce`:
+- for an array of type `number` and size of under 100, they perform faster than `for_traditional`. 
+- However, they are slower for `string` type. They perform randomly (with 60% error!) for larger arrays and are usually slower. 
+- In general, it is better to avoid them.
+
 
 If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true
 `, you can make `for-of` slow in ES5 too!!!  To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
@@ -70,13 +76,15 @@ See the ./src for full explanation.
     for_traditional x 93,918,160 ops/sec Â±2.26% (85 runs sampled)
     for_of x 20,043,782 ops/sec Â±0.64% (94 runs sampled)
     for_in x 1,855,402 ops/sec Â±0.89% (95 runs sampled)
-    Fastest is for_traditional
+    arr_reduce x 135,985,370 ops/sec ±1.46% (92 runs sampled)
+    Fastest is arr_reduce
     
     string array
-    for_traditional_str x 62,883,817 ops/sec Â±0.23% (92 runs sampled)
-    for_of_str x 36,321,814 ops/sec Â±0.47% (92 runs sampled)
-    for_in_str x 1,928,360 ops/sec Â±0.68% (93 runs sampled)
-    Fastest is for_traditional_str
+    for_traditional_str x 13,547,429 ops/sec ±2.45% (87 runs sampled)
+    for_of_str x 14,918,883 ops/sec ±0.77% (90 runs sampled)
+    for_in_str x 1,716,358 ops/sec ±0.84% (95 runs sampled)
+    arr_reduce_str x 12,690,067 ops/sec ±1.17% (86 runs sampled)
+    Fastest is for_of_str
         
     -------------------        
     array size of 100
@@ -84,13 +92,15 @@ See the ./src for full explanation.
     for_traditional x 9,624,379 ops/sec Â±0.29% (91 runs sampled)
     for_of x 2,293,562 ops/sec Â±0.83% (91 runs sampled)
     for_in x 257,905 ops/sec Â±0.34% (97 runs sampled)
-    Fastest is for_traditional
+    arr_reduce x 21,633,016 ops/sec ±0.23% (97 runs sampled)
+    Fastest is arr_reduce
     
     string array
-    for_traditional_str x 7,489,087 ops/sec Â±0.29% (94 runs sampled)
-    for_of_str x 4,219,285 ops/sec Â±0.23% (96 runs sampled)
-    for_in_str x 275,434 ops/sec Â±0.34% (96 runs sampled)
-    Fastest is for_traditional_str
+    for_traditional_str x 1,454,960 ops/sec ±1.15% (90 runs sampled)
+    for_of_str x 1,180,783 ops/sec ±3.83% (81 runs sampled)
+    for_in_str x 232,177 ops/sec ±2.85% (87 runs sampled)
+    arr_reduce_str x 1,455,498 ops/sec ±1.18% (89 runs sampled)
+    Fastest is for_traditional_str, arr_reduce_str
     
     -------------------    
     array size of 1000
@@ -98,12 +108,14 @@ See the ./src for full explanation.
     for_traditional x 807,444 ops/sec Â±0.22% (89 runs sampled)
     for_of x 310,846 ops/sec Â±0.62% (96 runs sampled)
     for_in x 27,566 ops/sec Â±0.33% (96 runs sampled)
+    arr_reduce x 649,244 ops/sec ±59.91% (78 runs sampled)
     Fastest is for_traditional
     
     string array
-    for_traditional_str x 643,079 ops/sec Â±1.59% (88 runs sampled)
-    for_of_str x 439,983 ops/sec Â±0.30% (97 runs sampled)
-    for_in_str x 28,672 ops/sec Â±1.55% (91 runs sampled)
+    for_traditional_str x 157,778 ops/sec ±0.55% (94 runs sampled)
+    for_of_str x 149,066 ops/sec ±0.77% (91 runs sampled)
+    for_in_str x 25,421 ops/sec ±0.74% (89 runs sampled)
+    arr_reduce_str x 147,033 ops/sec ±6.85% (86 runs sampled)
     Fastest is for_traditional_str
 
     -------------------    
@@ -115,13 +127,15 @@ See the ./src for full explanation.
     for_traditional x 806,810 ops/sec Â±0.32% (93 runs sampled)
     for_of x 809,966 ops/sec Â±0.28% (97 runs sampled)
     for_in x 27,447 ops/sec Â±0.41% (96 runs sampled)
+    arr_reduce x 1,093,011 ops/sec ±57.46% (95 runs sampled)
     Fastest is for_of
     
     string array
-    for_traditional_str x 641,393 ops/sec Â±3.32% (81 runs sampled)
-    for_of_str x 676,553 ops/sec Â±0.26% (96 runs sampled)
-    for_in_str x 29,130 ops/sec Â±1.45% (90 runs sampled)
-    Fastest is for_of_str
+    for_traditional_str x 158,800 ops/sec ±0.73% (92 runs sampled)
+    for_of_str x 160,705 ops/sec ±0.38% (90 runs sampled)
+    for_in_str x 25,161 ops/sec ±0.43% (95 runs sampled)
+    arr_reduce_str x 155,332 ops/sec ±3.94% (94 runs sampled)
+    Fastest is for_of_str,arr_reduce_str
     
 </details>
 
