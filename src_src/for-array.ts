@@ -40,9 +40,24 @@ function for_in (arr: number[]) {
   }
   return sum
 }
+
+function arr_reduce(arr: number[]) {
+  let sum = 0
+  sum = arr.reduce( (accumulator, currentValue) => {
+    return accumulator + currentValue;
+  }, sum)
+  return sum
+}
+
 /* ************************************************************************* */
 // test
-console.assert(for_of(arr) === for_in(arr) && for_in(arr) === for_traditional(arr))
+const r1 = for_traditional(arr)
+const r2 = for_of(arr)
+const r3 = for_in(arr)
+const r4 = arr_reduce(arr)
+console.assert(
+  (r1 === r2) && (r2 === r3) && (r3 == r4)
+)
 
 let suite = new Benchmark.Suite()
 
@@ -50,6 +65,7 @@ let suite = new Benchmark.Suite()
 suite.add("for_traditional", () => for_traditional(arr))
 suite.add("for_of", () => for_of(arr))
 suite.add("for_in", () => for_in(arr))
+suite.add("arr_reduce", () => arr_reduce(arr))
 
 // add listeners
 suite.on("cycle", (event) => console.log(String(event.target)) )
@@ -87,15 +103,29 @@ function for_of_str (arr_str: string[]) {
 function for_in_str (arr_str: string[]) {
   let sum = ""
   for (const i in arr_str) {
-    sum.concat(arr_str[i])
+    sum += arr_str[i]
   }
+  return sum
+}
+
+function arr_reduce_str(arr_str: string[]) {
+  let sum = ""
+  sum = arr_str.reduce( (accumulator, currentValue) => {
+    accumulator += currentValue;
+    return accumulator
+  }, sum)
   return sum
 }
 
 /* ************************************************************************* */
 // test
-console.assert(for_of_str(arr_str) === for_in_str(arr_str) && for_in_str(arr_str) === for_traditional_str(arr_str))
-
+const r1_str = for_traditional_str(arr_str)
+const r2_str = for_of_str(arr_str)
+const r3_str = for_in_str(arr_str)
+const r4_str = arr_reduce_str(arr_str)
+console.assert(
+  (r1_str === r2_str) && (r2_str === r3_str) && (r3_str == r4_str)
+)
 
 let suite2 = new Benchmark.Suite()
 
@@ -103,6 +133,7 @@ let suite2 = new Benchmark.Suite()
 suite2.add("for_traditional_str", () => for_traditional_str(arr_str))
 suite2.add("for_of_str", () => for_of_str(arr_str))
 suite2.add("for_in_str", () => for_in_str(arr_str))
+suite2.add("arr_reduce_str", () => arr_reduce_str(arr_str))
 
 // add listeners
 suite2.on("cycle", (event) => console.log(String(event.target)) )

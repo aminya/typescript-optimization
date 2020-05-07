@@ -50,6 +50,12 @@ If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of
   for (const i in arr) {
     sum += arr[i]
   }
+
+// arr_reduce
+  let sum = 0
+  sum = arr.reduce( (accumulator, currentValue, index) => {
+    return accumulator + currentValue;
+  }, sum)
 ```
 See the ./src for full explanation.
 
