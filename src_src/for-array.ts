@@ -71,7 +71,7 @@ const arr_str = chance.n(chance.string, arr_length)
 function for_traditional_str(arr_str: string[]) {
   let sum = ""
   for (let i = 0, l = arr_str.length; i < l; ++i) {
-    sum.concat(arr_str[i])
+    sum += arr_str[i]
   }
   return sum
 }
@@ -79,7 +79,7 @@ function for_traditional_str(arr_str: string[]) {
 function for_of_str (arr_str: string[]) {
   let sum = ""
   for (const a of arr_str) {
-    sum.concat(a)
+    sum += a
   }
   return sum
 }
