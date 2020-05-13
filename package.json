@@ -12,7 +12,7 @@
     "chance": "^1.1.4"
   },
   "devDependencies": {
-    "@types/chance": "^1.0.9",
+    "@types/chance": "^1.1.0",
     "typescript": "^3.8.3",
     "ts-node": "^8.7.0",
     "prettier": "^2.0.4",
