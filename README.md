@@ -427,10 +427,28 @@ function for_in(obj) {
     // +
     sum += str
 ```
-- For normal and large object sizes(>20): `concat` is faster than `+`
-- For small object sizes (~10): `+` is faster than `concat`
+Mostly `concat` is faster than `+`
 
 ```
+    string length: 38
+    object size of 3
+    obj string string
+    for_traditional_keys x 13,019,511 ops/sec ±0.71% (89 runs sampled)
+    for_traditional_keys_concat x 13,068,025 ops/sec ±0.72% (90 runs sampled)
+    for_in x 30,911,643 ops/sec ±0.95% (89 runs sampled)
+    for_in_concat x 31,078,136 ops/sec ±1.31% (88 runs sampled)
+    Fastest is for_in_concat,for_in
+
+    string length: 72
+    object size of 5
+    obj string string
+    for_traditional_keys x 8,173,944 ops/sec ±1.13% (88 runs sampled)
+    for_traditional_keys_concat x 8,364,054 ops/sec ±0.99% (93 runs sampled)
+    for_in x 19,812,720 ops/sec ±0.93% (92 runs sampled)
+    for_in_concat x 20,096,737 ops/sec ±0.88% (92 runs sampled)
+    Fastest is for_in_concat
+
+    string length: 124
     object size of 10
     obj string string
     for_traditional_keys x 4,342,449 ops/sec ±1.02% (88 runs sampled)
@@ -439,7 +457,7 @@ function for_in(obj) {
     for_in_concat x 11,602,182 ops/sec ±1.58% (87 runs sampled)
     Fastest is for_in
 
-
+    string length: 1227
     object size of 100
     obj string string
     for_traditional_keys x 194,822 ops/sec ±1.03% (90 runs sampled)
@@ -448,7 +466,7 @@ function for_in(obj) {
     for_in_concat x 145,208 ops/sec ±1.91% (84 runs sampled)
     Fastest is for_traditional_keys_concat
 
-
+    string length 12432
     object size of 1000
     obj string string
     for_traditional_keys x 8,477 ops/sec ±1.58% (89 runs sampled)

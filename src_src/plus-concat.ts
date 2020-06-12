@@ -65,6 +65,7 @@ console.assert(
   && testout === for_in(obj)
   && testout === for_in_concat(obj)
 )
+console.log("string length:", testout.length)
 
 let suite = new Benchmark.Suite()
 
