@@ -417,3 +417,44 @@ function for_in(obj) {
     Fastest is for_traditional_keys
     
 </details>
+
+
+### String `+` vs `concat`
+```ts
+    // concat
+    sum = sum.concat(str)
+
+    // +
+    sum += str
+```
+- For normal and large object sizes(>20): `concat` is faster than `+`
+- For small object sizes (~10): `+` is faster than `concat`
+
+```
+    object size of 10
+    obj string string
+    for_traditional_keys x 4,342,449 ops/sec ±1.02% (88 runs sampled)
+    for_traditional_keys_concat x 4,248,121 ops/sec ±1.95% (87 runs sampled)
+    for_in x 11,853,136 ops/sec ±1.19% (88 runs sampled)
+    for_in_concat x 11,602,182 ops/sec ±1.58% (87 runs sampled)
+    Fastest is for_in
+
+
+    object size of 100
+    obj string string
+    for_traditional_keys x 194,822 ops/sec ±1.03% (90 runs sampled)
+    for_traditional_keys_concat x 196,711 ops/sec ±0.93% (94 runs sampled)
+    for_in x 146,565 ops/sec ±1.80% (87 runs sampled)
+    for_in_concat x 145,208 ops/sec ±1.91% (84 runs sampled)
+    Fastest is for_traditional_keys_concat
+
+
+    object size of 1000
+    obj string string
+    for_traditional_keys x 8,477 ops/sec ±1.58% (89 runs sampled)
+    for_traditional_keys_concat x 8,924 ops/sec ±0.54% (94 runs sampled)
+    for_in x 8,028 ops/sec ±0.74% (92 runs sampled)
+    for_in_concat x 7,965 ops/sec ±0.75% (90 runs sampled)
+    Fastest is for_traditional_keys_concat
+
+```
