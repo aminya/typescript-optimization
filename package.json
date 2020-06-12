@@ -5,12 +5,15 @@
     "typescript": "tsc || echo done",
     "babel": "babel src --out-dir src",
     "prettier": "prettier ./src/**/* --write",
+    "clean": "shx rm -rf /src",
     "build": "npm run typescript -s && npm run prettier -s",
     "run-for-array": "node src/for-array.js",
     "run-for-object": " node src/for-object.js",
     "run-for-of-arrays": "node src/for-of-arrays.js",
     "run-for-traditional-array": "node src/for-traditional-array.js",
-    "run-plus-concat": "node src/plus-concat"
+    "run-plus-concat": "node src/plus-concat",
+    "rollup": "npm run clean && env NODE_ENV=production env BABEL_ENV=production rollup -c",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "benchmark": "latest",
@@ -24,7 +27,14 @@
     "babel-preset-minify": "latest",
     "@babel/plugin-transform-for-of": "latest",
     "@babel/core": "latest",
-    "@babel/cli": "latest"
+    "@babel/cli": "latest",
+    "rollup": "latest",
+    "@rollup/plugin-commonjs": "latest",
+    "@rollup/plugin-node-resolve": "latest",
+    "@rollup/plugin-typescript": "latest",
+    "rollup-plugin-terser": "latest",
+    "tslib": "latest",
+    "shx": "latest"
   },
   "prettier": {
     "semi": false,

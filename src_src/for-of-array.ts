@@ -3,7 +3,7 @@ import { Chance } from "chance"
 const chance = new Chance(12345)
 const chance2 = new Chance(12345)
 
-const Benchmark = require("benchmark")
+import Benchmark from "benchmark"
 
 /* ************************************************************************* */
 // parameter

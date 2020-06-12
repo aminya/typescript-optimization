@@ -1,6 +1,6 @@
 import { Chance } from "chance"
 const chance = new Chance()
-const Benchmark = require("benchmark")
+import Benchmark from "benchmark"
 
 /* ************************************************************************* */
 // parameter

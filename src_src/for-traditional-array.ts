@@ -5,7 +5,7 @@ const chance2 = new Chance(12345)
 const chance3 = new Chance(12345)
 const chance4 = new Chance(12345)
 
-const Benchmark = require("benchmark")
+import Benchmark from "benchmark"
 
 /* ************************************************************************* */
 // parameter
