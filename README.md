@@ -59,7 +59,7 @@ If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of
 
 // arr_reduce
   let sum = 0
-  sum = arr.reduce( (accumulator, currentValue, index) => {
+  sum = arr.reduce( (accumulator, currentValue) => {
     return accumulator + currentValue;
   }, sum)
 ```
@@ -296,55 +296,50 @@ See the ./src for full explanation.
         `for_in` > `for_traditional_values` > `for_of_values` >  `for_of_entries` > `for_traditional_keys`> `for_of_keys`   
 
 ```typescript
-function for_traditional_keys(obj: Obj) {
+function for_traditional_keys(obj) {
   let sum = ""
   const keys = Object.keys(obj)
   for (let i = 0, l = keys.length; i < l; ++i) {
-    sum.concat(obj[keys[i]])
+    sum += obj[keys[i]]
   }
   return sum
 }
-
-function for_traditional_values(obj: Obj) {
+function for_traditional_values(obj) {
   let sum = ""
   const values = Object.values(obj)
   for (let i = 0, l = values.length; i < l; ++i) {
-    sum.concat(values[i])
+    sum += values[i]
   }
   return sum
 }
-
-function for_of_keys (obj: Obj) {
+function for_of_keys(obj) {
   let sum = ""
   const keys = Object.keys(obj)
   for (const k of keys) {
-    sum.concat(obj[k])
+    sum += obj[k]
   }
   return sum
 }
-
-function for_of_entries (obj: Obj) {
+function for_of_entries(obj) {
   let sum = ""
   const entries = Object.entries(obj)
   for (const [a, k] of entries) {
-    sum.concat(a)
+    sum += a
   }
   return sum
 }
-
-function for_of_values(obj: Obj) {
+function for_of_values(obj) {
   let sum = ""
   const values = Object.values(obj)
   for (const value of values) {
-    sum.concat(value)
+    sum += value
   }
   return sum
 }
-
-function for_in (obj: Obj) {
+function for_in(obj) {
   let sum = ""
   for (const k in obj) {
-    sum.concat(obj[k])
+    sum += obj[k]
   }
   return sum
 }
