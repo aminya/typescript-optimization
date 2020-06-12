@@ -10,6 +10,8 @@ Benchmarks are done inside Node, Atom, WebStorm.
 - Use `Object.keys` for looping over objects.
 - Closure based loops (like `arr.reduce`) are not consistent and should be avoided.
 - Use Transformers/compilers to transform other types of `for` to  `for_traditional`
+- For string joining: `concat` is faster than `+`
+
 ---------------------------
 
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
@@ -283,13 +285,13 @@ See the ./src for full explanation.
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Objects
 
 - ES2020 and ES5: 
-    - object size of more 17:  the best is `for_traditional_keys`
+    - Normal and large objects:  the best is `for_traditional_keys`
     
         Best to worst:   
         
         `for_traditional_keys`> `for_of_keys` > `for_in` > `for_of_values` > `for_traditional_values` > `for_of_entries`
     
-    - object size of less than 17:  the best is `for_in`.  This is probably because of CPU cache size.
+    - Small objects:  the best is `for_in`.  This is probably because of CPU cache size.
    
         Best to worst:   
         
@@ -429,7 +431,10 @@ function for_in(obj) {
 ```
 Mostly `concat` is faster than `+`
 
+<details>
+<summary>Benchmark-Result</summary>
 ```
+
     string length: 38
     object size of 3
     obj string string
@@ -476,3 +481,4 @@ Mostly `concat` is faster than `+`
     Fastest is for_traditional_keys_concat
 
 ```
+</details>
