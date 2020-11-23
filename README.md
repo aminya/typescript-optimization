@@ -1,7 +1,7 @@
 # TypeScript-optimization
 Compares different for-loops in TypeScript/JavaScript
 
-Benchmarks are done inside Node, Atom, WebStorm.
+Benchmarks are done inside Node.
 
 ## Summary:
 - Traditional `for` loops are faster.
