@@ -57,7 +57,7 @@ function for_traditional_length_lookup () {
 }
 
 // to only measure its effect on calling inside the for-head
-function for_traditional_full_lockup (arr2) {
+function for_traditional_full_lockup (arr2: number[]) {
   let sum = 0
   for (let i = 0; i < arr_return().length; ++i) {
     sum += arr2[i] // only comparing lookup
