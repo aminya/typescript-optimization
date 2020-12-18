@@ -76,7 +76,7 @@ suite.add("for_in", () => for_in(obj))
 suite.add("for_in_concat", () => for_in_concat(obj))
 
 // add listeners
-suite.on("cycle", (event) => console.log(String(event.target)) )
+suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
 
 // run benchmark

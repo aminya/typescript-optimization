@@ -68,7 +68,7 @@ suite.add("for_in", () => for_in(arr))
 suite.add("arr_reduce", () => arr_reduce(arr))
 
 // add listeners
-suite.on("cycle", (event) => console.log(String(event.target)) )
+suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
 
 // run benchmark
@@ -136,7 +136,7 @@ suite2.add("for_in_str", () => for_in_str(arr_str))
 suite2.add("arr_reduce_str", () => arr_reduce_str(arr_str))
 
 // add listeners
-suite2.on("cycle", (event) => console.log(String(event.target)) )
+suite2.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite2.on("complete", () => console.log("Fastest is " + suite2.filter("fastest").map("name")) )
 
 // run benchmark

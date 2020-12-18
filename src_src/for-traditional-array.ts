@@ -83,7 +83,7 @@ suite.add("for_traditional_length_lookup", () => for_traditional_length_lookup()
 suite.add("for_traditional_full_lockup", () => for_traditional_full_lockup(arr2))
 
 // add listeners
-suite.on("cycle", (event) => console.log(String(event.target)) )
+suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
 
 // run benchmark

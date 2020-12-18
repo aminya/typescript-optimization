@@ -98,7 +98,7 @@ suite.add("for_of_values", () => for_of_values(obj))
 suite.add("for_in", () => for_in(obj))
 
 // add listeners
-suite.on("cycle", (event) => console.log(String(event.target)) )
+suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
 
 // run benchmark

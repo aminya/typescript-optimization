@@ -50,7 +50,7 @@ suite.add("for_of", () => for_of())
 suite.add("for_of_full_lookup", () => for_of_full_lookup())
 
 // add listeners
-suite.on("cycle", (event) => console.log(String(event.target)) )
+suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
 suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
 
 // run benchmark
