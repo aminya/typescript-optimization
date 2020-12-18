@@ -6,7 +6,7 @@ import Benchmark from "benchmark"
 // parameter
 const obj_length = 1000
 
-console.log("object size of "+ obj_length)
+console.log("object size of ", obj_length)
 
 /* ************************************************************************* */
 // obj string string

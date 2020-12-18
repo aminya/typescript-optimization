@@ -9,7 +9,7 @@ import Benchmark from "benchmark"
 // parameter
 const arr_length = 1000
 
-console.log("array size of "+ arr_length)
+console.log("array size of ", arr_length)
 
 /* ************************************************************************* */
 // number array
