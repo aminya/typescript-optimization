@@ -11,6 +11,7 @@ devDependencies:
   '@types/benchmark': 2.1.0
   '@types/chance': 1.1.1
   babel-preset-minify: 0.5.1
+  cross-env: 7.0.3
   prettier: 2.2.1
   rollup: 2.35.1
   rollup-plugin-terser: 7.0.2_rollup@2.35.1
@@ -774,6 +775,27 @@ packages:
     dev: true
     resolution:
       integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
+  /cross-env/7.0.3:
+    dependencies:
+      cross-spawn: 7.0.3
+    dev: true
+    engines:
+      node: '>=10.14'
+      npm: '>=6'
+      yarn: '>=1'
+    hasBin: true
+    resolution:
+      integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==
+  /cross-spawn/7.0.3:
+    dependencies:
+      path-key: 3.1.1
+      shebang-command: 2.0.0
+      which: 2.0.2
+    dev: true
+    engines:
+      node: '>= 8'
+    resolution:
+      integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0
@@ -1273,6 +1295,10 @@ packages:
     optional: true
     resolution:
       integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
+  /isexe/2.0.0:
+    dev: true
+    resolution:
+      integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
   /isobject/2.1.0:
     dependencies:
       isarray: 1.0.0
@@ -1531,6 +1557,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
+  /path-key/3.1.1:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==
   /path-parse/1.0.6:
     dev: true
     resolution:
@@ -1725,6 +1757,20 @@ packages:
     optional: true
     resolution:
       integrity: sha512-JxHc1weCN68wRY0fhCoXpyK55m/XPHafOmK4UWD7m2CI14GMcFypt4w/0+NV5f/ZMby2F6S2wwA7fgynh9gWSw==
+  /shebang-command/2.0.0:
+    dependencies:
+      shebang-regex: 3.0.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==
+  /shebang-regex/3.0.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
   /shelljs/0.8.4:
     dependencies:
       glob: 7.1.6
@@ -2007,6 +2053,15 @@ packages:
     optional: true
     resolution:
       integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+  /which/2.0.2:
+    dependencies:
+      isexe: 2.0.0
+    dev: true
+    engines:
+      node: '>= 8'
+    hasBin: true
+    resolution:
+      integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   /wrappy/1.0.2:
     dev: true
     resolution:
@@ -2029,6 +2084,7 @@ specifiers:
   babel-preset-minify: latest
   benchmark: latest
   chance: latest
+  cross-env: ^7.0.3
   prettier: latest
   rollup: latest
   rollup-plugin-terser: latest

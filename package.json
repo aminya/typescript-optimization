@@ -13,7 +13,7 @@
     "run-for-traditional-array": "node src/for-traditional-array.js",
     "run-plus-concat": "node src/plus-concat",
     "start": "npm run build && npm run run-for-array && npm run run-for-object && npm run run-for-of-array && npm run run-for-traditional-array && npm run run-plus-concat",
-    "rollup": "npm run clean && env NODE_ENV=production env BABEL_ENV=production rollup -c",
+    "rollup": "npm run clean && cross-env NODE_ENV=production cross-env BABEL_ENV=production rollup -c",
     "prepare": "npm run build"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@types/benchmark": "^2.1.0",
     "@types/chance": "^1.1.1",
     "babel-preset-minify": "latest",
+    "cross-env": "^7.0.3",
     "prettier": "latest",
     "rollup": "latest",
     "rollup-plugin-terser": "latest",
