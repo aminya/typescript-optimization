@@ -42,24 +42,5 @@
   "prettier": {
     "semi": false,
     "printWidth": 120
-  },
-  "babel": {
-    "presets": [
-      [
-        "minify",
-        {
-          "deadcode": false,
-          "mangle": false
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-for-of",
-        {
-          "loose": true
-        }
-      ]
-    ]
   }
 }
