@@ -20,21 +20,22 @@
     "chance": "latest"
   },
   "devDependencies": {
-    "@types/chance": "latest",
-    "typescript": "latest",
-    "ts-node": "latest",
-    "prettier": "latest",
-    "babel-preset-minify": "latest",
-    "@babel/plugin-transform-for-of": "latest",
-    "@babel/core": "latest",
     "@babel/cli": "latest",
-    "rollup": "latest",
+    "@babel/core": "latest",
+    "@babel/plugin-transform-for-of": "latest",
     "@rollup/plugin-commonjs": "latest",
     "@rollup/plugin-node-resolve": "latest",
     "@rollup/plugin-typescript": "latest",
+    "@types/benchmark": "^2.1.0",
+    "@types/chance": "^1.1.1",
+    "babel-preset-minify": "latest",
+    "prettier": "latest",
+    "rollup": "latest",
     "rollup-plugin-terser": "latest",
+    "shx": "latest",
+    "ts-node": "latest",
     "tslib": "latest",
-    "shx": "latest"
+    "typescript": "latest"
   },
   "prettier": {
     "semi": false,
