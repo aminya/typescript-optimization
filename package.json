@@ -2,7 +2,7 @@
   "name": "typescript-optimization",
   "version": "1.0.0",
   "scripts": {
-    "typescript": "tsc || echo done",
+    "typescript": "tsc -p ./src_src/tsconfig.json || echo done",
     "babel": "babel src --out-dir src",
     "prettier": "prettier ./src/**/* --write",
     "clean": "shx rm -rf /src",

@@ -6,7 +6,7 @@ import typescript from "@rollup/plugin-typescript"
 let plugins = [
     // so Rollup can convert TypeScript to JavaScript
     typescript(
-      { noEmitOnError: false }
+        { tsconfig: "./src_src/tsconfig.json", noEmitOnError: false, module: "ESNext" }
     ),
 
     // so Rollup can find externals
