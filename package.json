@@ -1,5 +1,6 @@
 {
   "name": "typescript-optimization",
+  "browser": "./dist/index.html",
   "version": "1.0.0",
   "scripts": {
     "typescript": "tsc -p ./src_src/tsconfig.json || echo done",
@@ -14,6 +15,8 @@
     "run-plus-concat": "node src/plus-concat",
     "start": "npm run build && npm run run-for-array && npm run run-for-object && npm run run-for-of-array && npm run run-for-traditional-array && npm run run-plus-concat",
     "rollup": "npm run clean && cross-env NODE_ENV=production cross-env BABEL_ENV=production rollup -c",
+    "parcel": "cross-env NODE_ENV=production parcel serve --target browser ./index.html",
+    "serve": "npm run parcel",
     "prepare": "npm run build"
   },
   "dependencies": {
@@ -31,6 +34,7 @@
     "@types/chance": "^1.1.1",
     "babel-preset-minify": "latest",
     "cross-env": "^7.0.3",
+    "parcel": "^2.0.0-nightly.481",
     "prettier": "latest",
     "rollup": "latest",
     "rollup-plugin-terser": "latest",
@@ -38,6 +42,14 @@
     "ts-node": "latest",
     "tslib": "latest",
     "typescript": "latest"
+  },
+  "targets": {
+    "browser": {
+      "engines": {
+        "browsers": "Chrome 80"
+      },
+      "includeNodeModules": true
+    }
   },
   "prettier": {
     "semi": false,
