@@ -4,7 +4,7 @@ import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
-const arr_length = 1000
+import { arr_length } from "./parameters"
 
 console.log("array size of ", arr_length)
 

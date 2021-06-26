@@ -4,9 +4,9 @@ import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
-const obj_length = 1000
+import { arr_length } from "./parameters"
 
-console.log("object size of ", obj_length)
+console.log("object size of ", arr_length)
 
 /* ************************************************************************* */
 // obj string string
@@ -15,7 +15,7 @@ console.log("object size of ", obj_length)
 // setup
 type Obj = { [p: string]: string }
 const obj: Obj = {}
-for (let i = 0; i < obj_length; i++) {
+for (let i = 0; i < arr_length; i++) {
   obj[chance.string()] = chance.string()
 }
 
