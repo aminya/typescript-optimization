@@ -1,6 +1,6 @@
 import { Chance } from "chance"
 const chance = new Chance()
-import Benchmark from "benchmark"
+import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
@@ -87,24 +87,35 @@ console.assert(
     testout === for_in(obj)
 )
 
-const suite = new Benchmark.Suite()
+const suite = new Benchmark()
 
 // add benchmarks
-suite.add("for_traditional_keys", () => for_traditional_keys(obj))
-suite.add("for_traditional_values", () => for_traditional_values(obj))
-suite.add("for_of_keys", () => for_of_keys(obj))
-suite.add("for_of_entries", () => for_of_entries(obj))
-suite.add("for_of_values", () => for_of_values(obj))
-suite.add("for_in", () => for_in(obj))
-
-// add listeners
-suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
-
-// run benchmark
-console.log("obj string string")
-suite.run({ async: false })
+suite.add("for_traditional_keys", () => {
+  for_traditional_keys(obj)
+})
+suite.add("for_traditional_values", () => {
+  for_traditional_values(obj)
+})
+suite.add("for_of_keys", () => {
+  for_of_keys(obj)
+})
+suite.add("for_of_entries", () => {
+  for_of_entries(obj)
+})
+suite.add("for_of_values", () => {
+  for_of_values(obj)
+})
+suite.add("for_in", () => {
+  for_in(obj)
+})
 
 /* ************************************************************************* */
 
-export {}
+async function main() {
+  // run benchmark
+  console.log("\n obj string string \n")
+  await suite.run()
+}
+main().catch((e) => {
+  throw e
+})

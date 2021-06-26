@@ -5,7 +5,7 @@ const chance2 = new Chance(12345)
 const chance3 = new Chance(12345)
 const chance4 = new Chance(12345)
 
-import Benchmark from "benchmark"
+import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
@@ -73,22 +73,29 @@ const r3 = for_traditional_length_lookup()
 const r4 = for_traditional_full_lockup(arr2)
 console.assert(r1 === r2 && r2 === r3 && r3 == r4)
 
-const suite = new Benchmark.Suite()
+const suite = new Benchmark()
 
 // add benchmarks
-suite.add("for_traditional", () => for_traditional())
-suite.add("for_traditional_const", () => for_traditional_const())
-suite.add("for_traditional_length_lookup", () => for_traditional_length_lookup())
-suite.add("for_traditional_full_lockup", () => for_traditional_full_lockup(arr2))
-
-// add listeners
-suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
-
-// run benchmark
-console.log("number array")
-suite.run({ async: false })
+suite.add("for_traditional", () => {
+  for_traditional()
+})
+suite.add("for_traditional_const", () => {
+  for_traditional_const()
+})
+suite.add("for_traditional_length_lookup", () => {
+  for_traditional_length_lookup()
+})
+suite.add("for_traditional_full_lockup", () => {
+  for_traditional_full_lockup(arr2)
+})
 
 /* ************************************************************************* */
 
-export {}
+async function main() {
+  // run benchmark
+  console.log("\n number array \n")
+  await suite.run()
+}
+main().catch((e) => {
+  throw e
+})

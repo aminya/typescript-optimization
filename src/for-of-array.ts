@@ -3,7 +3,7 @@ import { Chance } from "chance"
 const chance = new Chance(12345)
 const chance2 = new Chance(12345)
 
-import Benchmark from "benchmark"
+import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
@@ -42,20 +42,23 @@ function for_of_full_lookup() {
 // test
 console.assert(for_of() === for_of_full_lookup())
 
-const suite = new Benchmark.Suite()
+const suite = new Benchmark()
 
 // add benchmarks
-suite.add("for_of", () => for_of())
-suite.add("for_of_full_lookup", () => for_of_full_lookup())
-
-// add listeners
-suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
-
-// run benchmark
-console.log("number array")
-suite.run({ async: false })
+suite.add("for_of", () => {
+  for_of()
+})
+suite.add("for_of_full_lookup", () => {
+  for_of_full_lookup()
+})
 
 /* ************************************************************************* */
 
-export {}
+async function main() {
+  // run benchmark
+  console.log("\n number array \n")
+  await suite.run()
+}
+main().catch((e) => {
+  throw e
+})

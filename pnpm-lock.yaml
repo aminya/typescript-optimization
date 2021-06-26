@@ -4,10 +4,8 @@ specifiers:
   '@babel/cli': latest
   '@babel/core': latest
   '@babel/plugin-transform-for-of': latest
-  '@types/benchmark': ^2.1.0
   '@types/chance': ^1.1.2
   babel-preset-minify: latest
-  benchmark: latest
   chance: latest
   cross-env: ^7.0.3
   eslint-config-atomic: ^1.16.1
@@ -15,19 +13,19 @@ specifiers:
   prettier: latest
   prettier-config-atomic: ^2.0.5
   shx: latest
+  tiny-benchy: ^1.0.2
   ts-node: latest
   tslib: latest
   typescript: latest
 
 dependencies:
-  benchmark: 2.1.4
   chance: 1.1.7
+  tiny-benchy: 1.0.2
 
 devDependencies:
   '@babel/cli': 7.14.5_@babel+core@7.14.6
   '@babel/core': 7.14.6
   '@babel/plugin-transform-for-of': 7.14.5_@babel+core@7.14.6
-  '@types/benchmark': 2.1.0
   '@types/chance': 1.1.2
   babel-preset-minify: 0.5.1
   cross-env: 7.0.3
@@ -1058,10 +1056,6 @@ packages:
     resolution: {integrity: sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==}
     dev: true
 
-  /@types/benchmark/2.1.0:
-    resolution: {integrity: sha512-wxT2/LZn4z0NvSfZirxmBx686CU7EXp299KHkIk79acXpQtgeYHrslFzDacPGXifC0Pe3CEaLup07bgY1PnuQw==}
-    dev: true
-
   /@types/chance/1.1.2:
     resolution: {integrity: sha512-OYwnnh2D7QAleRpPWnBQBfDZMlapMHoNeuvyEg7WrDiMApgcKOnXgyiVAl+OzBvhyQmfYkx7YtFXOm8E9IYsNw==}
     dev: true
@@ -1770,13 +1764,6 @@ packages:
     dependencies:
       tweetnacl: 0.14.5
     dev: true
-
-  /benchmark/2.1.4:
-    resolution: {integrity: sha1-CfPeMckWQl1JjMLuVloOvzwqVik=}
-    dependencies:
-      lodash: 4.17.21
-      platform: 1.3.6
-    dev: false
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
@@ -4554,6 +4541,7 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: true
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -5251,10 +5239,6 @@ packages:
     dependencies:
       find-up: 2.1.0
     dev: true
-
-  /platform/1.3.6:
-    resolution: {integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==}
-    dev: false
 
   /pn/1.1.0:
     resolution: {integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==}
@@ -6653,6 +6637,10 @@ packages:
   /timsort/0.3.0:
     resolution: {integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=}
     dev: true
+
+  /tiny-benchy/1.0.2:
+    resolution: {integrity: sha512-IpawVd9wuRyVXyajQ/La9ugQXKJohIEA6ufdPZsNuqOH7U4//xq4ivc7YdyCBshYccrUJovwYhMKWhxwdFgDsA==}
+    dev: false
 
   /to-fast-properties/1.0.3:
     resolution: {integrity: sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=}

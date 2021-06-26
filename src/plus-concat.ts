@@ -1,6 +1,6 @@
 import { Chance } from "chance"
 const chance = new Chance()
-import Benchmark from "benchmark"
+import Benchmark from "tiny-benchy"
 
 /* ************************************************************************* */
 // parameter
@@ -67,22 +67,29 @@ console.assert(
 )
 console.log("string length:", testout.length)
 
-const suite = new Benchmark.Suite()
+const suite = new Benchmark()
 
 // add benchmarks
-suite.add("for_traditional_keys", () => for_traditional_keys(obj))
-suite.add("for_traditional_keys_concat", () => for_traditional_keys_concat(obj))
-suite.add("for_in", () => for_in(obj))
-suite.add("for_in_concat", () => for_in_concat(obj))
-
-// add listeners
-suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
-
-// run benchmark
-console.log("obj string string")
-suite.run({ async: false })
+suite.add("for_traditional_keys", () => {
+  for_traditional_keys(obj)
+})
+suite.add("for_traditional_keys_concat", () => {
+  for_traditional_keys_concat(obj)
+})
+suite.add("for_in", () => {
+  for_in(obj)
+})
+suite.add("for_in_concat", () => {
+  for_in_concat(obj)
+})
 
 /* ************************************************************************* */
 
-export {}
+async function main() {
+  // run benchmark
+  console.log("\n obj string string \n")
+  await suite.run()
+}
+main().catch((e) => {
+  throw e
+})
