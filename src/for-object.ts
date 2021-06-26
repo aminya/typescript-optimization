@@ -52,8 +52,8 @@ function for_of_keys(obj: Obj) {
 function for_of_entries(obj: Obj) {
   let sum = ""
   const entries = Object.entries(obj)
-  for (const [a, k] of entries) {
-    sum += a
+  for (const [key, value] of entries) {
+    sum += value
   }
   return sum
 }
@@ -78,8 +78,8 @@ function for_in(obj: Obj) {
 /* ************************************************************************* */
 // test
 const testout = for_traditional_keys(obj)
+
 console.assert(
-  testout === for_traditional_keys(obj) &&
     testout === for_traditional_values(obj) &&
     testout === for_of_keys(obj) &&
     testout === for_of_entries(obj) &&
