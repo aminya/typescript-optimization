@@ -85,9 +85,11 @@ suite.add("for_traditional_const", () => {
 suite.add("for_traditional_length_lookup", () => {
   for_traditional_length_lookup()
 })
-suite.add("for_traditional_full_lockup", () => {
-  for_traditional_full_lockup(arr2)
-})
+
+// TOO Slow!
+// suite.add("for_traditional_full_lockup", () => {
+//   for_traditional_full_lockup(arr2)
+// })
 
 /* ************************************************************************* */
 
