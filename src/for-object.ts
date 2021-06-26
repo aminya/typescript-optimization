@@ -87,7 +87,7 @@ console.assert(
     testout === for_in(obj)
 )
 
-let suite = new Benchmark.Suite()
+const suite = new Benchmark.Suite()
 
 // add benchmarks
 suite.add("for_traditional_keys", () => for_traditional_keys(obj))
@@ -99,7 +99,7 @@ suite.add("for_in", () => for_in(obj))
 
 // add listeners
 suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
+suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
 
 // run benchmark
 console.log("obj string string")

@@ -278,6 +278,7 @@ for (const a of arr_return()) {
 ### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Objects
 
 - ES2020 and ES5:
+
   - Normal and large objects: the best is `for_traditional_keys`
 
     Best to worst:

@@ -73,7 +73,7 @@ const r3 = for_traditional_length_lookup()
 const r4 = for_traditional_full_lockup(arr2)
 console.assert(r1 === r2 && r2 === r3 && r3 == r4)
 
-let suite = new Benchmark.Suite()
+const suite = new Benchmark.Suite()
 
 // add benchmarks
 suite.add("for_traditional", () => for_traditional())
@@ -83,7 +83,7 @@ suite.add("for_traditional_full_lockup", () => for_traditional_full_lockup(arr2)
 
 // add listeners
 suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
+suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
 
 // run benchmark
 console.log("number array")

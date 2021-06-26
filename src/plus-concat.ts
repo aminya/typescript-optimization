@@ -67,7 +67,7 @@ console.assert(
 )
 console.log("string length:", testout.length)
 
-let suite = new Benchmark.Suite()
+const suite = new Benchmark.Suite()
 
 // add benchmarks
 suite.add("for_traditional_keys", () => for_traditional_keys(obj))
@@ -77,7 +77,7 @@ suite.add("for_in_concat", () => for_in_concat(obj))
 
 // add listeners
 suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
+suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
 
 // run benchmark
 console.log("obj string string")

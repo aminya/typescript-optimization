@@ -57,7 +57,7 @@ const r3 = for_in(arr)
 const r4 = arr_reduce(arr)
 console.assert(r1 === r2 && r2 === r3 && r3 == r4)
 
-let suite = new Benchmark.Suite()
+const suite = new Benchmark.Suite()
 
 // add benchmarks
 suite.add("for_traditional", () => for_traditional(arr))
@@ -67,7 +67,7 @@ suite.add("arr_reduce", () => arr_reduce(arr))
 
 // add listeners
 suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
+suite.on("complete", () => console.log(`Fastest is ${suite.filter("fastest").map("name")}`))
 
 // run benchmark
 console.log("number array")
@@ -123,7 +123,7 @@ const r3_str = for_in_str(arr_str)
 const r4_str = arr_reduce_str(arr_str)
 console.assert(r1_str === r2_str && r2_str === r3_str && r3_str == r4_str)
 
-let suite2 = new Benchmark.Suite()
+const suite2 = new Benchmark.Suite()
 
 // add benchmarks
 suite2.add("for_traditional_str", () => for_traditional_str(arr_str))
@@ -133,7 +133,7 @@ suite2.add("arr_reduce_str", () => arr_reduce_str(arr_str))
 
 // add listeners
 suite2.on("cycle", (event: { target: any }) => console.log(String(event.target)))
-suite2.on("complete", () => console.log("Fastest is " + suite2.filter("fastest").map("name")))
+suite2.on("complete", () => console.log(`Fastest is ${suite2.filter("fastest").map("name")}`))
 
 // run benchmark
 console.log("string array")
