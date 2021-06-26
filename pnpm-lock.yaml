@@ -13,14 +13,14 @@ specifiers:
   prettier: latest
   prettier-config-atomic: ^2.0.5
   shx: latest
-  tiny-benchy: ^1.0.2
+  tiny-benchy: https://github.com/aminya/tiny-benchy
   ts-node: latest
   tslib: latest
   typescript: latest
 
 dependencies:
   chance: 1.1.7
-  tiny-benchy: 1.0.2
+  tiny-benchy: github.com/aminya/tiny-benchy/fce55d6c96cca6c394b5be59e0f1ffe08f47f62b
 
 devDependencies:
   '@babel/cli': 7.14.5_@babel+core@7.14.6
@@ -6638,10 +6638,6 @@ packages:
     resolution: {integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=}
     dev: true
 
-  /tiny-benchy/1.0.2:
-    resolution: {integrity: sha512-IpawVd9wuRyVXyajQ/La9ugQXKJohIEA6ufdPZsNuqOH7U4//xq4ivc7YdyCBshYccrUJovwYhMKWhxwdFgDsA==}
-    dev: false
-
   /to-fast-properties/1.0.3:
     resolution: {integrity: sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=}
     engines: {node: '>=0.10.0'}
@@ -7111,3 +7107,9 @@ packages:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
     dev: true
+
+  github.com/aminya/tiny-benchy/fce55d6c96cca6c394b5be59e0f1ffe08f47f62b:
+    resolution: {tarball: https://codeload.github.com/aminya/tiny-benchy/tar.gz/fce55d6c96cca6c394b5be59e0f1ffe08f47f62b}
+    name: tiny-benchy
+    version: 1.0.2
+    dev: false

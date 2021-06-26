@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "chance": "latest",
-    "tiny-benchy": "^1.0.2"
+    "tiny-benchy": "https://github.com/aminya/tiny-benchy"
   },
   "devDependencies": {
     "@babel/cli": "latest",
