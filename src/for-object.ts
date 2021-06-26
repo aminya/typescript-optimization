@@ -81,9 +81,9 @@ const testout = for_traditional_keys(obj)
 console.assert(
   testout === for_traditional_keys(obj) &&
     testout === for_traditional_values(obj) &&
-    testout == for_of_keys(obj) &&
-    testout == for_of_entries(obj) &&
-    testout == for_of_values(obj) &&
+    testout === for_of_keys(obj) &&
+    testout === for_of_entries(obj) &&
+    testout === for_of_values(obj) &&
     testout === for_in(obj)
 )
 

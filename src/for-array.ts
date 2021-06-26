@@ -121,7 +121,7 @@ const r1_str = for_traditional_str(arr_str)
 const r2_str = for_of_str(arr_str)
 const r3_str = for_in_str(arr_str)
 const r4_str = arr_reduce_str(arr_str)
-console.assert(r1_str === r2_str && r2_str === r3_str && r3_str == r4_str)
+console.assert(r1_str === r2_str && r2_str === r3_str && r3_str === r4_str)
 
 const suite2 = new Benchmark()
 

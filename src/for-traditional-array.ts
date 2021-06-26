@@ -71,7 +71,7 @@ const r1 = for_traditional()
 const r2 = for_traditional_const()
 const r3 = for_traditional_length_lookup()
 const r4 = for_traditional_full_lockup(arr2)
-console.assert(r1 === r2 && r2 === r3 && r3 == r4)
+console.assert(r1 === r2 && r2 === r3 && r3 === r4)
 
 const suite = new Benchmark()
 
