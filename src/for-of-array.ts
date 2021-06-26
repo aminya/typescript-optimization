@@ -21,7 +21,7 @@ function arr_return() {
 /* ************************************************************************* */
 // functions
 
-function for_of () {
+function for_of() {
   // array is made inside the function for fare comparison
   const arr = chance.n(chance.floating, arr_length)
   let sum = 0
@@ -31,8 +31,7 @@ function for_of () {
   return sum
 }
 
-
-function for_of_full_lookup () {
+function for_of_full_lookup() {
   let sum = 0
   for (const a of arr_return()) {
     sum += a
@@ -50,8 +49,8 @@ suite.add("for_of", () => for_of())
 suite.add("for_of_full_lookup", () => for_of_full_lookup())
 
 // add listeners
-suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
+suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
+suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
 
 // run benchmark
 console.log("number array")
@@ -59,4 +58,4 @@ suite.run({ async: false })
 
 /* ************************************************************************* */
 
-export {};
+export {}

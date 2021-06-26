@@ -13,8 +13,8 @@ console.log("object size of ", obj_length)
 
 /* ************************************************************************* */
 // setup
-type Obj = {[p:string] : string}
-const obj: Obj  = {}
+type Obj = { [p: string]: string }
+const obj: Obj = {}
 for (let i = 0; i < obj_length; i++) {
   obj[chance.string()] = chance.string()
 }
@@ -40,7 +40,7 @@ function for_traditional_keys_concat(obj: Obj) {
   return sum
 }
 
-function for_in (obj: Obj) {
+function for_in(obj: Obj) {
   let sum = ""
   for (const k in obj) {
     sum += obj[k]
@@ -48,7 +48,7 @@ function for_in (obj: Obj) {
   return sum
 }
 
-function for_in_concat (obj: Obj) {
+function for_in_concat(obj: Obj) {
   let sum = ""
   for (const k in obj) {
     sum = sum.concat(obj[k])
@@ -60,10 +60,10 @@ function for_in_concat (obj: Obj) {
 // test
 const testout = for_traditional_keys(obj)
 console.assert(
-  testout === for_traditional_keys(obj)
-  && testout === for_traditional_keys_concat(obj)
-  && testout === for_in(obj)
-  && testout === for_in_concat(obj)
+  testout === for_traditional_keys(obj) &&
+    testout === for_traditional_keys_concat(obj) &&
+    testout === for_in(obj) &&
+    testout === for_in_concat(obj)
 )
 console.log("string length:", testout.length)
 
@@ -76,8 +76,8 @@ suite.add("for_in", () => for_in(obj))
 suite.add("for_in_concat", () => for_in_concat(obj))
 
 // add listeners
-suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
+suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
+suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
 
 // run benchmark
 console.log("obj string string")
@@ -85,4 +85,4 @@ suite.run({ async: false })
 
 /* ************************************************************************* */
 
-export {};
+export {}

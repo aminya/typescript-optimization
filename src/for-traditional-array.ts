@@ -25,7 +25,7 @@ const arr2 = arr_return()
 /* ************************************************************************* */
 // functions
 
-function for_traditional () {
+function for_traditional() {
   // array is made inside the function for fare comparison with for_traditional_full_lockup
   const arr = chance.n(chance.floating, arr_length)
   let sum = 0
@@ -35,7 +35,7 @@ function for_traditional () {
   return sum
 }
 
-function for_traditional_const () {
+function for_traditional_const() {
   // array is made inside the function for fare comparison for_traditional_full_lockup
   const arr = chance2.n(chance2.floating, arr_length)
   let sum = 0
@@ -46,7 +46,7 @@ function for_traditional_const () {
   return sum
 }
 
-function for_traditional_length_lookup () {
+function for_traditional_length_lookup() {
   // array is made inside the function for fare comparison for_traditional_full_lockup
   const arr = chance3.n(chance3.floating, arr_length)
   let sum = 0
@@ -57,11 +57,10 @@ function for_traditional_length_lookup () {
 }
 
 // to only measure its effect on calling inside the for-head
-function for_traditional_full_lockup (arr2: number[]) {
+function for_traditional_full_lockup(arr2: number[]) {
   let sum = 0
   for (let i = 0; i < arr_return().length; ++i) {
     sum += arr2[i] // only comparing lookup
-
   }
   return sum
 }
@@ -72,7 +71,7 @@ const r1 = for_traditional()
 const r2 = for_traditional_const()
 const r3 = for_traditional_length_lookup()
 const r4 = for_traditional_full_lockup(arr2)
-console.assert( (r1 === r2) && (r2 === r3) && (r3 == r4))
+console.assert(r1 === r2 && r2 === r3 && r3 == r4)
 
 let suite = new Benchmark.Suite()
 
@@ -83,8 +82,8 @@ suite.add("for_traditional_length_lookup", () => for_traditional_length_lookup()
 suite.add("for_traditional_full_lockup", () => for_traditional_full_lockup(arr2))
 
 // add listeners
-suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
+suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
+suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
 
 // run benchmark
 console.log("number array")
@@ -92,4 +91,4 @@ suite.run({ async: false })
 
 /* ************************************************************************* */
 
-export {};
+export {}

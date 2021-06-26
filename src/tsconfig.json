@@ -5,12 +5,8 @@
     "target": "ES2020",
     "sourceMap": false,
     "esModuleInterop": true,
-    "lib": [
-      "ES2020"
-    ],
-    "outDir": "../src"
+    "lib": ["ES2020"],
+    "outDir": "../dist"
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

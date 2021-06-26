@@ -13,8 +13,8 @@ console.log("object size of ", obj_length)
 
 /* ************************************************************************* */
 // setup
-type Obj = {[p:string] : string}
-const obj: Obj  = {}
+type Obj = { [p: string]: string }
+const obj: Obj = {}
 for (let i = 0; i < obj_length; i++) {
   obj[chance.string()] = chance.string()
 }
@@ -40,7 +40,7 @@ function for_traditional_values(obj: Obj) {
   return sum
 }
 
-function for_of_keys (obj: Obj) {
+function for_of_keys(obj: Obj) {
   let sum = ""
   const keys = Object.keys(obj)
   for (const k of keys) {
@@ -49,7 +49,7 @@ function for_of_keys (obj: Obj) {
   return sum
 }
 
-function for_of_entries (obj: Obj) {
+function for_of_entries(obj: Obj) {
   let sum = ""
   const entries = Object.entries(obj)
   for (const [a, k] of entries) {
@@ -67,7 +67,7 @@ function for_of_values(obj: Obj) {
   return sum
 }
 
-function for_in (obj: Obj) {
+function for_in(obj: Obj) {
   let sum = ""
   for (const k in obj) {
     sum += obj[k]
@@ -79,12 +79,12 @@ function for_in (obj: Obj) {
 // test
 const testout = for_traditional_keys(obj)
 console.assert(
-  testout === for_traditional_keys(obj)
-  && testout === for_traditional_values(obj)
-  && testout == for_of_keys(obj)
-  && testout == for_of_entries(obj)
-  && testout == for_of_values(obj)
-  && testout === for_in(obj)
+  testout === for_traditional_keys(obj) &&
+    testout === for_traditional_values(obj) &&
+    testout == for_of_keys(obj) &&
+    testout == for_of_entries(obj) &&
+    testout == for_of_values(obj) &&
+    testout === for_in(obj)
 )
 
 let suite = new Benchmark.Suite()
@@ -98,8 +98,8 @@ suite.add("for_of_values", () => for_of_values(obj))
 suite.add("for_in", () => for_in(obj))
 
 // add listeners
-suite.on("cycle", (event: {target: any}) => console.log(String(event.target)) )
-suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")) )
+suite.on("cycle", (event: { target: any }) => console.log(String(event.target)))
+suite.on("complete", () => console.log("Fastest is " + suite.filter("fastest").map("name")))
 
 // run benchmark
 console.log("obj string string")
@@ -107,4 +107,4 @@ suite.run({ async: false })
 
 /* ************************************************************************* */
 
-export {};
+export {}

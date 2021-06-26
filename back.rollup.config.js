@@ -6,7 +6,7 @@ import typescript from "@rollup/plugin-typescript"
 let plugins = [
     // so Rollup can convert TypeScript to JavaScript
     typescript(
-        { tsconfig: "./src_src/tsconfig.json", noEmitOnError: false, module: "ESNext" }
+        { tsconfig: "./src/tsconfig.json", noEmitOnError: false, module: "ESNext" }
     ),
 
     // so Rollup can find externals
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 export default [
     // main
     {
-        input: 'src_src/bundle.ts',
+        input: 'src/bundle.ts',
         output: [
             {
                 dir: "src",
