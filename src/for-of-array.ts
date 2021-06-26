@@ -42,7 +42,7 @@ function for_of_full_lookup() {
 // test
 console.assert(for_of() === for_of_full_lookup())
 
-const suite = new Benchmark()
+const suite = new Benchmark(100)
 
 // add benchmarks
 suite.add("for_of", () => {

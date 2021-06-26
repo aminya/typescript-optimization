@@ -87,7 +87,7 @@ console.assert(
     testout === for_in(obj)
 )
 
-const suite = new Benchmark()
+const suite = new Benchmark(100)
 
 // add benchmarks
 suite.add("for_traditional_keys", () => {

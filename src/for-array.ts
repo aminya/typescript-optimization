@@ -57,7 +57,7 @@ const r3 = for_in(arr)
 const r4 = arr_reduce(arr)
 console.assert(r1 === r2 && r2 === r3 && r3 == r4)
 
-const suite = new Benchmark()
+const suite = new Benchmark(100)
 
 // add benchmarks
 suite.add("for_traditional", () => {
@@ -123,7 +123,7 @@ const r3_str = for_in_str(arr_str)
 const r4_str = arr_reduce_str(arr_str)
 console.assert(r1_str === r2_str && r2_str === r3_str && r3_str === r4_str)
 
-const suite2 = new Benchmark()
+const suite2 = new Benchmark(100)
 
 // add benchmarks
 suite2.add("for_traditional_str", () => {

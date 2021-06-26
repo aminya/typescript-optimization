@@ -67,7 +67,7 @@ console.assert(
 )
 console.log("string length:", testout.length)
 
-const suite = new Benchmark()
+const suite = new Benchmark(100)
 
 // add benchmarks
 suite.add("for_traditional_keys", () => {
