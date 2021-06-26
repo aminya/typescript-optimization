@@ -5,9 +5,9 @@
   "scripts": {
     "typescript": "tsc -p ./src/tsconfig.json || echo done",
     "babel": "babel src --out-dir src",
-    "prettier": "prettier ./src/**/* --write",
+    "format": "prettier . --write",
     "clean": "shx rm -rf /src",
-    "build": "npm run typescript -s && npm run prettier -s",
+    "build": "npm run typescript -s",
     "run-for-array": "node src/for-array.js",
     "run-for-object": " node src/for-object.js",
     "run-for-of-array": "node src/for-of-array.js",
@@ -32,6 +32,7 @@
     "cross-env": "^7.0.3",
     "parcel": "^2.0.0-nightly.734",
     "prettier": "latest",
+    "prettier-config-atomic": "^2.0.5",
     "shx": "latest",
     "ts-node": "latest",
     "tslib": "latest",
@@ -45,8 +46,5 @@
       "includeNodeModules": true
     }
   },
-  "prettier": {
-    "semi": false,
-    "printWidth": 120
-  }
+  "prettier": "prettier-config-atomic"
 }
