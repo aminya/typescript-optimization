@@ -14,7 +14,7 @@
     "run-for-of-array": "node ./dist/for-of-array.js",
     "run-for-traditional-array": "node ./dist/for-traditional-array.js",
     "run-plus-concat": "node ./dist/plus-concat",
-    "start": "npm run build && npm run run-for-array && npm run run-for-object && npm run run-for-of-array && npm run run-for-traditional-array && npm run run-plus-concat",
+    "start": "npm run build && npm run run-for-array && npm run run-for-traditional-array && npm run run-for-of-array  && npm run run-for-object && npm run run-plus-concat",
     "parcel": "cross-env NODE_ENV=production parcel serve --target browser ./index.html",
     "serve": "npm run parcel",
     "prepare": "npm run build"

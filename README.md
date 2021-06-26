@@ -10,30 +10,32 @@ Benchmarks are done inside Node.
 - Don't call functions (or lookup arrays) in the head of `for` loop
 - Define constant variables as constant
 - Use `Object.keys` for looping over objects.
-- Closure based loops (like `arr.reduce`) are not consistent and should be avoided.
+- Closure based loops (like `arr.reduce`) are very slow and should be avoided.
 - Use Transformers/compilers to transform other types of `for` to `for_traditional`
 - For string joining: `concat` is faster than `+`
 
 ---
 
-### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Arrays
+### Running the benchmark
+
+```
+npm install
+npm run start
+```
+
+### Traditional `for` vs `for-of` vs `for-in`- Looping over Arrays
 
 - ES6 and above: the best is `for_traditional_keys`
   Best to worst:
-  `for_traditional` > `for_of` > `for_in`
+  `for_traditional` > `for_of` > `for_in` > `arr_reduce`
+
 - ES5 and lower: Both `for_traditional` and `for-of` are the best
   Best to worst:
-  `for_traditional` == `for_of` > `for_in`
+  `for_traditional` == `for_of` > `for_in` > `arr_reduce`
 
 This is true for array of number, string, etc, and for any array size.
 
-Closure based loops like `arr_reduce`:
-
-- for an array of type `number` and size of under 100, they perform faster than `for_traditional`.
-- However, they are slower for `string` type. They perform randomly (with 60% error!) for larger arrays and are usually slower.
-- In general, it is better to avoid them.
-
-If you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true `, you can make `for-of` slow in ES5 too!!! To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
+**ES5 Node:** if you notice, you see by targeting ES5 the TypeScript compiler converts `for-of` to the `traditional-for`, and that makes it faster than the original `for-of`!! Actually, by setting `"downlevelIteration": true `, you can make `for-of` slow in ES5 too!!! To fix this issue you can use `npm run build` which uses `@babel/plugin-transform-for-of` to convert `for-of` to `traditional-for` ("loose" is faster than "assumeArray").
 
 ```typescript
 // Traditional
@@ -69,52 +71,55 @@ See the ./src for full explanation.
     -------------------
     ES2020:
 
-    array size of 10
-    number array
-    for_traditional x 93,918,160 ops/sec Â±2.26% (85 runs sampled)
-    for_of x 20,043,782 ops/sec Â±0.64% (94 runs sampled)
-    for_in x 1,855,402 ops/sec Â±0.89% (95 runs sampled)
-    arr_reduce x 135,985,370 ops/sec ±1.46% (92 runs sampled)
-    Fastest is arr_reduce
+    array size of  10
 
-    string array
-    for_traditional_str x 13,547,429 ops/sec ±2.45% (87 runs sampled)
-    for_of_str x 14,918,883 ops/sec ±0.77% (90 runs sampled)
-    for_in_str x 1,716,358 ops/sec ±0.84% (95 runs sampled)
-    arr_reduce_str x 12,690,067 ops/sec ±1.17% (86 runs sampled)
-    Fastest is for_of_str
+     number array
 
-    -------------------
-    array size of 100
-    number array
-    for_traditional x 9,624,379 ops/sec Â±0.29% (91 runs sampled)
-    for_of x 2,293,562 ops/sec Â±0.83% (91 runs sampled)
-    for_in x 257,905 ops/sec Â±0.34% (97 runs sampled)
-    arr_reduce x 21,633,016 ops/sec ±0.23% (97 runs sampled)
-    Fastest is arr_reduce
+    rank 1:  for_traditional 1,006,036.38 opts/sec (mean: 994ns, stddev: 0.001ms, 100 samples)
+    rank 2:  for_of 588,928.26 opts/sec (mean: 0.002ms, stddev: 0.002ms, 100 samples)
+    rank 3:  for_in 547,645.1 opts/sec (mean: 0.002ms, stddev: 0.005ms, 100 samples)
+    rank 4:  arr_reduce 100,020.01 opts/sec (mean: 0.01ms, stddev: 0.062ms, 100 samples)
 
-    string array
-    for_traditional_str x 1,454,960 ops/sec ±1.15% (90 runs sampled)
-    for_of_str x 1,180,783 ops/sec ±3.83% (81 runs sampled)
-    for_in_str x 232,177 ops/sec ±2.85% (87 runs sampled)
-    arr_reduce_str x 1,455,498 ops/sec ±1.18% (89 runs sampled)
-    Fastest is for_traditional_str, arr_reduce_str
+     string array
+
+    rank 1:  for_traditional_str 1,077,586.31 opts/sec (mean: 928ns, stddev: 0.001ms, 100 samples)
+    rank 2:  for_of_str 651,465.81 opts/sec (mean: 0.002ms, stddev: 0.005ms, 100 samples)
+    rank 3:  for_in_str 640,204.85 opts/sec (mean: 0.002ms, stddev: 0.003ms, 100 samples)
+    rank 4:  arr_reduce_str 178,284.91 opts/sec (mean: 0.006ms, stddev: 0.041ms, 100 samples)
 
     -------------------
-    array size of 1000
-    number array
-    for_traditional x 807,444 ops/sec Â±0.22% (89 runs sampled)
-    for_of x 310,846 ops/sec Â±0.62% (96 runs sampled)
-    for_in x 27,566 ops/sec Â±0.33% (96 runs sampled)
-    arr_reduce x 649,244 ops/sec ±59.91% (78 runs sampled)
-    Fastest is for_traditional
+    array size of  100
 
-    string array
-    for_traditional_str x 157,778 ops/sec ±0.55% (94 runs sampled)
-    for_of_str x 149,066 ops/sec ±0.77% (91 runs sampled)
-    for_in_str x 25,421 ops/sec ±0.74% (89 runs sampled)
-    arr_reduce_str x 147,033 ops/sec ±6.85% (86 runs sampled)
-    Fastest is for_traditional_str
+     number array
+
+    rank 1:  for_traditional 344,946.54 opts/sec (mean: 0.003ms, stddev: 0.004ms, 100 samples)
+    rank 2:  for_of 100,070.05 opts/sec (mean: 0.01ms, stddev: 0.026ms, 100 samples)
+    rank 3:  for_in 98,931.54 opts/sec (mean: 0.01ms, stddev: 0.026ms, 100 samples)
+    rank 4:  arr_reduce 93,501.64 opts/sec (mean: 0.011ms, stddev: 0.051ms, 100 samples)
+
+     string array
+
+    rank 1:  for_traditional_str 282,087.44 opts/sec (mean: 0.004ms, stddev: 0.004ms, 100 samples)
+    rank 2:  for_of_str 159,108.99 opts/sec (mean: 0.006ms, stddev: 0.02ms, 100 samples)
+    rank 3:  for_in_str 84,373.95 opts/sec (mean: 0.012ms, stddev: 0.028ms, 100 samples)
+    rank 4:  arr_reduce_str 75,471.7 opts/sec (mean: 0.013ms, stddev: 0.032ms, 100 samples)
+
+    -------------------
+    array size of  1000
+
+     number array
+
+    rank 1:  for_traditional 55,193.73 opts/sec (mean: 0.018ms, stddev: 0.046ms, 100 samples)
+    rank 2:  for_of 44,591.1 opts/sec (mean: 0.022ms, stddev: 0.028ms, 100 samples)
+    rank 3:  for_in 34,046.03 opts/sec (mean: 0.029ms, stddev: 0.056ms, 100 samples)
+    rank 4:  arr_reduce 25,354.33 opts/sec (mean: 0.039ms, stddev: 0.045ms, 100 samples)
+
+     string array
+
+    rank 1:  for_traditional_str 53,934.52 opts/sec (mean: 0.019ms, stddev: 0.034ms, 100 samples)
+    rank 2:  for_of_str 45,431.83 opts/sec (mean: 0.022ms, stddev: 0.028ms, 100 samples)
+    rank 3:  for_in_str 34,488.7 opts/sec (mean: 0.029ms, stddev: 0.053ms, 100 samples)
+    rank 4:  arr_reduce_str 17,905.1 opts/sec (mean: 0.056ms, stddev: 0.06ms, 100 samples)
 
     -------------------
     ES5:
@@ -177,31 +182,34 @@ for (let i = 0; i < arr_return().length; ++i) {
 
     ES2020:
     -------------------
-    array size of 10
-    number array
-    for_traditional x 62,302 ops/sec Â±0.72% (89 runs sampled)
-    for_traditional_const x 61,790 ops/sec Â±0.97% (93 runs sampled)
-    for_traditional_length_lookup x 62,299 ops/sec Â±1.11% (87 runs sampled)
-    for_traditional_full_lockup x 5,647 ops/sec Â±0.94% (93 runs sampled)
-    Fastest is for_traditional
-    -------------------
+    array size of  10
 
-    array size of 100
-    number array
-    for_traditional x 6,481 ops/sec Â±0.81% (93 runs sampled)
-    for_traditional_const x 6,575 ops/sec Â±0.90% (93 runs sampled)
-    for_traditional_length_lookup x 6,590 ops/sec Â±0.86% (93 runs sampled)
-    for_traditional_full_lockup x 65.56 ops/sec Â±0.89% (68 runs sampled)
-    Fastest is for_traditional_length_lookup,for_traditional_const
+     number array
+
+    rank 1:  for_traditional 41,949.83 opts/sec (mean: 0.024ms, stddev: 0.007ms, 100 samples)
+    rank 2:  for_traditional_const 20,005.6 opts/sec (mean: 0.05ms, stddev: 0.081ms, 100 samples)
+    rank 3:  for_traditional_length_lookup 18,777.58 opts/sec (mean: 0.053ms, stddev: 0.118ms, 100 samples)
 
     -------------------
-    array size of 1000
-    number array
-    for_traditional x 645 ops/sec Â±0.92% (91 runs sampled)
-    for_traditional_const x 643 ops/sec Â±0.83% (91 runs sampled)
-    for_traditional_length_lookup x 661 ops/sec Â±0.57% (91 runs sampled)
-    for_traditional_full_lockup x 0.66 ops/sec Â±0.67% (6 runs sampled)
-    Fastest is for_traditional_length_lookup
+
+    array size of  100
+
+     number array
+
+    rank 1:  for_traditional 7,183.08 opts/sec (mean: 0.139ms, stddev: 0.058ms, 100 samples)
+    rank 2:  for_traditional_const 7,168.82 opts/sec (mean: 0.139ms, stddev: 0.055ms, 100 samples)
+    rank 3:  for_traditional_length_lookup 6,961.9 opts/sec (mean: 0.144ms, stddev: 0.082ms, 100 samples)
+    rank 4:  for_traditional_full_lockup 65.56 ops/sec
+
+    -------------------
+    array size of  1000
+
+     number array
+
+    rank 1:  for_traditional 785.84 opts/sec (mean: 1.273ms, stddev: 0.16ms, 100 samples)
+    rank 2:  for_traditional_const 776.89 opts/sec (mean: 1.287ms, stddev: 0.105ms, 100 samples)
+    rank 3:  for_traditional_length_lookup 771.57 opts/sec (mean: 1.296ms, stddev: 0.172ms, 100 samples)
+    rank 4:  for_traditional_full_lockup 0.66 ops/sec
 
     -------------------
     ES5:
@@ -218,7 +226,7 @@ for (let i = 0; i < arr_return().length; ++i) {
 
 ### `for-of` optimization
 
-- in all versions: similar result
+- in all versions: `for_of` with array defined as `const` outside of the loop is faster.
 
 ```typescript
 // for-of
@@ -242,27 +250,31 @@ for (const a of arr_return()) {
     ES2020:
 
     -------------------
-    array size of 10
-    number array
-    for_of x 65,064 ops/sec Â±0.89% (89 runs sampled)
-    for_of_full_lookup x 65,289 ops/sec Â±0.92% (94 runs sampled)
-    Fastest is for_of_full_lookup,for_of
+
+    array size of  10
+
+     number array
+
+    rank 1:  for_of 22,915.28 opts/sec (mean: 0.044ms, stddev: 0.091ms, 100 samples)
+    rank 2:  for_of_full_lookup 19,462.07 opts/sec (mean: 0.051ms, stddev: 0.095ms, 100 samples)
 
     -------------------
 
-    array size of 100
-    number array
-    for_of x 6,542 ops/sec Â±0.74% (93 runs sampled)
-    for_of_full_lookup x 6,549 ops/sec Â±1.09% (93 runs sampled)
-    Fastest is for_of,for_of_full_lookup
+    array size of  100
+
+     number array
+
+    rank 1:  for_of 6,973.79 opts/sec (mean: 0.143ms, stddev: 0.063ms, 100 samples)
+    rank 2:  for_of_full_lookup 3,560.01 opts/sec (mean: 0.281ms, stddev: 0.234ms, 100 samples)
 
     -------------------
 
-    array size of 1000
-    number array
-    for_of x 663 ops/sec Â±0.91% (91 runs sampled)
-    for_of_full_lookup x 665 ops/sec Â±0.89% (92 runs sampled)
-    Fastest is for_of_full_lookup,for_of
+    array size of  1000
+
+     number array
+
+    rank 1:  for_of 756.4 opts/sec (mean: 1.322ms, stddev: 0.254ms, 100 samples)
+    rank 2:  for_of_full_lookup 737.15 opts/sec (mean: 1.357ms, stddev: 0.407ms, 100 samples)
 
     -------------------
     ES5:
@@ -275,21 +287,16 @@ for (const a of arr_return()) {
 
 </details>
 
-### Traditional `for` vs `for-of` vs `for-in`- Looping ovr Objects
+### Traditional `for` vs `for-of` vs `for-in`- Looping over Objects
 
 - ES2020 and ES5:
 
-  - Normal and large objects: the best is `for_traditional_keys`
+  - the best is `for_traditional_keys`
 
     Best to worst:
 
     `for_traditional_keys`> `for_of_keys` > `for_in` > `for_of_values` > `for_traditional_values` > `for_of_entries`
 
-  - Small objects: the best is `for_in`. This is probably because of CPU cache size.
-
-    Best to worst:
-
-    `for_in` > `for_traditional_values` > `for_of_values` > `for_of_entries` > `for_traditional_keys`> `for_of_keys`
 
 ```typescript
 function for_traditional_keys(obj) {
@@ -348,57 +355,52 @@ function for_in(obj) {
 
     ES2020:
 
-    object size of 10
-    obj string string
-    for_traditional_keys x 5,198,136 ops/sec ±1.07% (88 runs sampled)
-    for_traditional_values x 10,641,417 ops/sec ±0.65% (92 runs sampled)
-    for_of_keys x 4,964,972 ops/sec ±1.14% (88 runs sampled)
-    for_of_entries x 5,432,608 ops/sec ±1.08% (89 runs sampled)
-    for_of_values x 10,047,025 ops/sec ±0.34% (95 runs sampled)
-    for_in x 32,279,989 ops/sec ±0.39% (97 runs sampled)
-    Fastest is for_in
+    object size of  10
 
-    object size of 17
-    obj string string
-    for_traditional_keys x 2,812,406 ops/sec ±1.11% (88 runs sampled)
-    for_traditional_values x 6,925,259 ops/sec ±0.52% (93 runs sampled)
-    for_of_keys x 2,618,206 ops/sec ±1.54% (83 runs sampled)
-    for_of_entries x 3,116,106 ops/sec ±1.33% (90 runs sampled)
-    for_of_values x 6,625,984 ops/sec ±0.34% (93 runs sampled)
-    for_in x 26,191,330 ops/sec ±1.26% (95 runs sampled)
-    Fastest is for_in
+     obj string string
 
-    object size of 20
-    obj string string
-    for_traditional_keys x 1,127,018 ops/sec ±1.29% (88 runs sampled)
-    for_traditional_values x 279,544 ops/sec ±0.39% (95 runs sampled)
-    for_of_keys x 1,112,033 ops/sec ±0.78% (86 runs sampled)
-    for_of_entries x 191,583 ops/sec ±0.38% (96 runs sampled)
-    for_of_values x 276,410 ops/sec ±1.27% (93 runs sampled)
-    for_in x 767,111 ops/sec ±1.19% (83 runs sampled)
-    Fastest is for_traditional_keys
-    -------------------
+    rank 1:  for_traditional_keys 1,043,841.32 opts/sec (mean: 958ns, stddev: 0.001ms, 100 samples)
+    rank 2:  for_traditional_values 668,449.12 opts/sec (mean: 0.001ms, stddev: 0.002ms, 100 samples)
+    rank 3:  for_of_keys 597,014.95 opts/sec (mean: 0.002ms, stddev: 0.005ms, 100 samples)
+    rank 4:  for_of_entries 544,959.15 opts/sec (mean: 0.002ms, stddev: 0.002ms, 100 samples)
+    rank 5:  for_of_values 183,083.12 opts/sec (mean: 0.005ms, stddev: 0.038ms, 100 samples)
+    rank 6:  for_in 113,791.53 opts/sec (mean: 0.009ms, stddev: 0.053ms, 100 samples)
 
-    object size of 100
-    obj string string
-    for_traditional_keys x 200,249 ops/sec ±1.09% (90 runs sampled)
-    for_traditional_values x 53,648 ops/sec ±0.93% (93 runs sampled)
-    for_of_keys x 193,080 ops/sec ±1.87% (86 runs sampled)
-    for_of_entries x 36,891 ops/sec ±0.96% (92 runs sampled)
-    for_of_values x 54,290 ops/sec ±0.54% (94 runs sampled)
-    for_in x 164,450 ops/sec ±0.95% (93 runs sampled)
-    Fastest is for_traditional_keys
+    object size of  17
+
+     obj string string
+
+    rank 1:  for_traditional_keys 850,340.07 opts/sec (mean: 0.001ms, stddev: 898.266ns, 100 samples)
+    rank 2:  for_traditional_values 643,086.81 opts/sec (mean: 0.002ms, stddev: 0.002ms, 100 samples)
+    rank 3:  for_of_keys 600,961.51 opts/sec (mean: 0.002ms, stddev: 0.002ms, 100 samples)
+    rank 4:  for_of_entries 221,582.1 opts/sec (mean: 0.005ms, stddev: 0.003ms, 100 samples)
+    rank 5:  for_of_values 155,666.25 opts/sec (mean: 0.006ms, stddev: 0.042ms, 100 samples)
+    rank 6:  for_in 92,395.82 opts/sec (mean: 0.011ms, stddev: 0.079ms, 100 samples)
 
     -------------------
-    object size of 1000
-    obj string string
-    for_traditional_keys x 9,539 ops/sec ±0.58% (93 runs sampled)
-    for_traditional_values x 4,322 ops/sec ±0.42% (93 runs sampled)
-    for_of_keys x 9,606 ops/sec ±0.59% (89 runs sampled)
-    for_of_entries x 3,155 ops/sec ±0.25% (96 runs sampled)
-    for_of_values x 4,370 ops/sec ±0.33% (96 runs sampled)
-    for_in x 8,779 ops/sec ±0.61% (92 runs sampled)
-    Fastest is for_of_keys
+
+    object size of  100
+
+     obj string string
+
+    rank 1:  for_traditional_keys 95,301.63 opts/sec (mean: 0.01ms, stddev: 0.02ms, 100 samples)
+    rank 2:  for_traditional_values 72,769.61 opts/sec (mean: 0.014ms, stddev: 0.028ms, 100 samples)
+    rank 3:  for_of_keys 70,363.07 opts/sec (mean: 0.014ms, stddev: 0.043ms, 100 samples)
+    rank 4:  for_of_entries 41,580.04 opts/sec (mean: 0.024ms, stddev: 0.031ms, 100 samples)
+    rank 5:  for_of_values 39,178.81 opts/sec (mean: 0.026ms, stddev: 0.027ms, 100 samples)
+    rank 6:  for_in 17,924.04 opts/sec (mean: 0.056ms, stddev: 0.074ms, 100 samples)
+
+    -------------------
+    object size of  1000
+
+     obj string string
+
+    rank 1:  for_traditional_keys 11,300.33 opts/sec (mean: 0.088ms, stddev: 0.034ms, 100 samples)
+    rank 2:  for_traditional_values 10,730.77 opts/sec (mean: 0.093ms, stddev: 0.088ms, 100 samples)
+    rank 3:  for_of_keys 8,409.44 opts/sec (mean: 0.119ms, stddev: 0.234ms, 100 samples)
+    rank 4:  for_of_entries 5,152.25 opts/sec (mean: 0.194ms, stddev: 0.048ms, 100 samples)
+    rank 5:  for_of_values 4,891.1 opts/sec (mean: 0.204ms, stddev: 0.062ms, 100 samples)
+    rank 6:  for_in 3,023.82 opts/sec (mean: 0.331ms, stddev: 0.14ms, 100 samples)
 
     -------------------
     ES5:
@@ -430,6 +432,7 @@ Mostly `concat` is faster than `+`
 <details>
 <summary>Benchmark-Result</summary>
 ```
+  -------
 
     string length: 38
     object size of 3
@@ -440,6 +443,8 @@ Mostly `concat` is faster than `+`
     for_in_concat x 31,078,136 ops/sec ±1.31% (88 runs sampled)
     Fastest is for_in_concat,for_in
 
+    -------
+
     string length: 72
     object size of 5
     obj string string
@@ -449,32 +454,41 @@ Mostly `concat` is faster than `+`
     for_in_concat x 20,096,737 ops/sec ±0.88% (92 runs sampled)
     Fastest is for_in_concat
 
-    string length: 124
-    object size of 10
-    obj string string
-    for_traditional_keys x 4,342,449 ops/sec ±1.02% (88 runs sampled)
-    for_traditional_keys_concat x 4,248,121 ops/sec ±1.95% (87 runs sampled)
-    for_in x 11,853,136 ops/sec ±1.19% (88 runs sampled)
-    for_in_concat x 11,602,182 ops/sec ±1.58% (87 runs sampled)
-    Fastest is for_in
+    -------
 
-    string length: 1227
-    object size of 100
-    obj string string
-    for_traditional_keys x 194,822 ops/sec ±1.03% (90 runs sampled)
-    for_traditional_keys_concat x 196,711 ops/sec ±0.93% (94 runs sampled)
-    for_in x 146,565 ops/sec ±1.80% (87 runs sampled)
-    for_in_concat x 145,208 ops/sec ±1.91% (84 runs sampled)
-    Fastest is for_traditional_keys_concat
+    object size of  10
+    string length: 121
 
-    string length 12432
-    object size of 1000
-    obj string string
-    for_traditional_keys x 8,477 ops/sec ±1.58% (89 runs sampled)
-    for_traditional_keys_concat x 8,924 ops/sec ±0.54% (94 runs sampled)
-    for_in x 8,028 ops/sec ±0.74% (92 runs sampled)
-    for_in_concat x 7,965 ops/sec ±0.75% (90 runs sampled)
-    Fastest is for_traditional_keys_concat
+     obj string string
+
+    rank 1:  for_traditional_keys 901,713.29 opts/sec (mean: 0.001ms, stddev: 0.001ms, 100 samples)
+    rank 2:  for_traditional_keys_concat 759,301.45 opts/sec (mean: 0.001ms, stddev: 0.001ms, 100 samples)
+    rank 3:  for_in 601,684.71 opts/sec (mean: 0.002ms, stddev: 0.002ms, 100 samples)
+    rank 4:  for_in_concat 200,924.25 opts/sec (mean: 0.005ms, stddev: 0.035ms, 100 samples)
+
+    -------
+
+    object size of  100
+    string length: 1194
+
+     obj string string
+
+    rank 1:  for_traditional_keys 76,155.66 opts/sec (mean: 0.013ms, stddev: 0.034ms, 100 samples)
+    rank 2:  for_traditional_keys_concat 70,402.7 opts/sec (mean: 0.014ms, stddev: 0.038ms, 100 samples)
+    rank 3:  for_in 66,480.52 opts/sec (mean: 0.015ms, stddev: 0.03ms, 100 samples)
+    rank 4:  for_in_concat 57,208.24 opts/sec (mean: 0.017ms, stddev: 0.058ms, 100 samples)
+
+    -------
+
+    object size of  1000
+    string length: 12269
+
+     obj string string
+
+    rank 1:  for_traditional_keys 11,736.81 opts/sec (mean: 0.085ms, stddev: 0.042ms, 100 samples)
+    rank 2:  for_traditional_keys_concat 11,411.1 opts/sec (mean: 0.088ms, stddev: 0.035ms, 100 samples)
+    rank 3:  for_in 11,087.46 opts/sec (mean: 0.09ms, stddev: 0.057ms, 100 samples)
+    rank 4:  for_in_concat 10,655.98 opts/sec (mean: 0.094ms, stddev: 0.042ms, 100 samples)
 
 ```
 </details>
